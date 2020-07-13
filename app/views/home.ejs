@@ -1,0 +1,5 @@
+<!-- views/home.ejs -->
+<h1>HOME</h1>
+<!-- user값이 넘어온다면 -->
+<%if (user) {%> <%= user.username%> 님 환영합니다. <%}%>
+<a href="/kakao" type="button">카카오 로그인</a>
