@@ -13,19 +13,29 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        createdAt: {
-            allowNull: false,
-            type: DataTypes.DATE
+        heartCount:
+        {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         },
-        updatedAt: {
+        status:
+        {
+            type: DataTypes.STRING,
             allowNull: false,
-            type: DataTypes.DATE
+            defaultValue: "ACTIVE"
+        },
+        createdAt: 
+        {
+            type: 'TIMESTAMP',
+            defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
+            allowNull: false
+        },
+        updatedAt: 
+        {
+            type: 'TIMESTAMP',
+            defaultValue: DataTypes.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            allowNull: false
         }
-    },
-    { 
-        
-    }
-       
-    )
+    })
 }
 
