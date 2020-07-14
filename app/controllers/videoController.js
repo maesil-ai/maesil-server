@@ -30,6 +30,9 @@ exports.videoOneInfo = (req,res) => {
     Video.findByPk(video_id)
     .then(data => {
         console.log(data)
+        if(data === null){
+            data = [];
+        }
         res.send({
             message: "특정 Video 조회 성공",
             code: 200,
