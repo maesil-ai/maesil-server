@@ -1,9 +1,4 @@
-const db = require("../models");
-const exerciseService = require('../services/exerciseServices');
-const exercise = require("../models/exercises");
-const Exercise = db.exercises;
-const Op = db.Sequelize.Op;
-
+const exerciseService = require('../services/exerciseService');
 
 exports.exerciseAllInfo = async (req,res) => {
     let result;

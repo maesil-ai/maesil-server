@@ -18,7 +18,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
-
 const db = require("./app/models");
 db.sequelize.sync();
 // // drop the table if it already exists
@@ -35,6 +34,7 @@ app.get("/", (req, res) => {
 require("./app/routes/passportRoute")(app);
 require("./app/routes/userRoute")(app);
 require("./app/routes/exerciseRoute")(app);
+require('./app/routes/tagRoute')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

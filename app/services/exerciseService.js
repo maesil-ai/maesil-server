@@ -14,13 +14,6 @@ exports.exerciseAllInfoService = async () =>{
 
 exports.exerciseOneInfoService = async (exercise_id) => {
 
-    let result = Exercise.findByPk(exercise_id);
-    return result;
-}
-
-exports.exerciseHistoryPostService = async (historyInfo) => {
-    
-    let result = Exercise.create(historyInfo);
-
+    let result = await Exercise.findByPk(exercise_id);
     return result;
 }

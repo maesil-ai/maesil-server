@@ -1,4 +1,3 @@
-const db = require("../models");
 const exerciseService = require('../services/userExerciseHistoryService');
 
 exports.exerciseHistoryPost = async (req,res)=>{
