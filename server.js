@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
 
 require("./app/routes/passportRoute")(app);
 require("./app/routes/userRoute")(app);
-require("./app/routes/videoRoute")(app);
+require("./app/routes/exerciseRoute")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
