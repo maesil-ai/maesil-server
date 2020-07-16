@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
             allowNull: false
         },
-        cal:
+        kcal:
         {
             type: DataTypes.INTEGER,
             defaultValue: 0
