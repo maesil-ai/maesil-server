@@ -6,9 +6,12 @@ const Op = db.Sequelize.Op;
 exports.exerciseAllInfoService = async () =>{
     console.log("exerciseAllInfoService Test")
    let result = await Exercise.findAll({
-        where: {
-            status: 'ACTIVE'
-        }
+       where: {
+        status: 'ACTIVE'
+       },
+       order: [
+           ['view_counts', 'DESC']
+       ]
     })
     return result;
 }
