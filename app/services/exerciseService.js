@@ -13,7 +13,6 @@ exports.exerciseAllInfoService = async () =>{
 }
 
 exports.exerciseOneInfoService = async (exercise_id) => {
-
     let result = await Exercise.findByPk(exercise_id);
     return result;
 }
