@@ -8,9 +8,8 @@ module.exports = app => {
     // // Create a new Tutorial
     // router.post("/", tutorials.create);
     router.post("/", users.signUp);
+    
 
-
-  
-    app.use('/api/user', router);
+    app.use('/user', router);
   };
   

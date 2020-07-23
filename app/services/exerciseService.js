@@ -30,3 +30,17 @@ exports.exerciseOneInfoService = async (exercise_id) => {
     //     )
     // })
 }
+
+exports.exerciseUploadService = async(exercise_info) => {
+    let result = await Exercise.create({
+        user_id : 1,
+        title: exercise_info.title,
+        description: exercise_info.description,
+        play_time: exercise_info.play_time,
+        thumb_url: exercise_info.thumb_url,
+        video_url: "Test",
+        reward: exercise_info.reward
+    })
+
+    return result;
+}
