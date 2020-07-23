@@ -9,7 +9,7 @@ exports.exerciseHistoryPost = async (req,res)=>{
         exercise_id : exercise_id,
         score: req.body.score,
         play_time: req.body.play_time,
-        cal: req.body.cal
+        kcal: req.body.kcal
     }
 
     try{
@@ -24,7 +24,6 @@ exports.exerciseHistoryPost = async (req,res)=>{
             message:
               err.message || "Some error occurred while Get the exerciseHistoryPost."
           });
-    }  
-
+    } 
     
 }
