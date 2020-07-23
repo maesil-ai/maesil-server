@@ -44,23 +44,6 @@ require("./app/routes/exerciseRoute")(app);
 require('./app/routes/tagRoute')(app);
 require('./app/routes/s3Route')(app);
 
-
-
-// require("greenlock-express")
-//     .init({
-//         packageRoot: __dirname,
-//         configDir: "./app/config/config.json",
- 
-//         // contact for security and critical bug notices
-//         maintainerEmail: "boyunzzang1@naver.com",
- 
-//         // whether or not to run at cloudscale
-//         cluster: false
-//     })
-//     // Serves on 80 and 443
-//     // Get's SSL certificates magically!
-//     .serve(app);
-
     
 
 // set port, listen for requests
@@ -68,19 +51,3 @@ const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
 console.log(`Server is running on port ${PORT}.`);
 });
-
-
-// try {
-//     const option = {
-//       ca: fs.readFileSync('/etc/letsencrypt/live/maesil.ai/fullchain.pem'),
-//       key: fs.readFileSync(('/etc/letsencrypt/live/maesil.ai/privkey.pem'), 'utf8').toString(),
-//       cert: fs.readFileSync(('/etc/letsencrypt/live/maesil.ai/cert.pem'), 'utf8').toString(),
-//     };
-  
-//     https.createServer(option, app).listen(sslport, () => {
-//       console.log(`[HTTPS] Soda Server is started on port ${colors.cyan(sslport)}`);
-//     });
-//   } catch (error) {
-//     console.log('[HTTPS] HTTPS 오류가 발생하였습니다. HTTPS 서버는 실행되지 않습니다.');
-//     console.log(error);
-//   }
