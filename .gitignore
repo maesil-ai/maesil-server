@@ -4,4 +4,3 @@ package-lock.json
 log/*
 .DS_Store
 app/config
-docker-compose.yml
