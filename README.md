@@ -7,7 +7,7 @@ docker-compose up (-d)
 ```
 
 # Maesil FE RUN
-#### 기존에 80 port가 돌고 있다면 build전 해☆
+#### 기존에 80 port가 돌고 있다면 build전에 해주기☆
 ```
 docker ps -> docker stop [containerId] -> docker rm [containerId]
 ```
