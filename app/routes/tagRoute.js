@@ -5,6 +5,7 @@ module.exports = app => {
  
   
    router.get('/', tags.tagAllInfo);
+   router.get('/:tag_id', tags.tagSearchInfo);
 
     app.use('/tags', router);
   };

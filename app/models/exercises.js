@@ -41,6 +41,11 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
+        level:
+        {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
         tag_id:
         {
             type: DataTypes.INTEGER,

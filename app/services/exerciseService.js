@@ -1,6 +1,7 @@
 const db = require("../models");
 const userRoute = require("../routes/userRoute");
 const Exercise = db.exercises;
+const ExerciseTag = db.exercise_tags;
 const Op = db.Sequelize.Op;
 
 exports.exerciseAllInfoService = async () =>{
@@ -40,6 +41,12 @@ exports.exerciseUploadService = async(exercise_info) => {
         thumb_url: exercise_info.thumb_url,
         video_url: exercise_info.video_url,
         reward: exercise_info.reward,
+        level: exercise_info.level,
+        tag_id: exercise_info.tag_id
+    })
+
+    await ExerciseTag.create({
+        exercise_id: result.exercise_id,
         tag_id: exercise_info.tag_id
     })
 

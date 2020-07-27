@@ -16,6 +16,7 @@ module.exports = app => {
         thumb_url: req.files.thumbnail[0].location,
         video_url: req.files.exercise[0].location,
         reward: req.body.reward,
+        level: req.body.level,
         tag_id: req.body.tag_id
     }
 
