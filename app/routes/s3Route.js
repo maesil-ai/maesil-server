@@ -15,7 +15,8 @@ module.exports = app => {
         play_time: req.body.play_time,
         thumb_url: req.files.thumbnail[0].location,
         video_url: req.files.exercise[0].location,
-        reward: req.body.reward
+        reward: req.body.reward,
+        tag_id: req.body.tag_id
     }
 
        await exerciseService.exerciseUploadService(exerciseInfo)

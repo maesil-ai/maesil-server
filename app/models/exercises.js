@@ -41,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
+        tag_id:
+        {
+            type: DataTypes.INTEGER,
+        },
         like_counts:
         {
             type: DataTypes.INTEGER,

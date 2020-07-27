@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
  
   
-   router.get("/", tags.tagAllInfo);
+   router.get('/', tags.tagAllInfo);
 
     app.use('/tags', router);
   };

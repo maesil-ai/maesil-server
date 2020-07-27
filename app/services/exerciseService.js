@@ -39,7 +39,8 @@ exports.exerciseUploadService = async(exercise_info) => {
         play_time: exercise_info.play_time,
         thumb_url: exercise_info.thumb_url,
         video_url: exercise_info.video_url,
-        reward: exercise_info.reward
+        reward: exercise_info.reward,
+        tag_id: exercise_info.tag_id
     })
 
     return result;
