@@ -38,7 +38,7 @@ exports.exerciseUploadService = async(exercise_info) => {
         description: exercise_info.description,
         play_time: exercise_info.play_time,
         thumb_url: exercise_info.thumb_url,
-        video_url: "Test",
+        video_url: exercise_info.video_url,
         reward: exercise_info.reward
     })
 
