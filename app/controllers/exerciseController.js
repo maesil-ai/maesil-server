@@ -48,21 +48,3 @@ exports.exerciseOneInfo = async (req,res) => {
 
 }
 
-exports.exerciseUpload = (req,res) => {
-
-    // try{
-    //     result =  await exerciseService.exerciseUploadService(req.body)
-    //     console.log(result)
-    //     return res.send({
-    //           message: "exercise 정보 삽입 성공",
-    //           code: 200,
-    //           result: result
-    //       })
-    //   }catch(err){
-    //       return res.status(500).send({
-    //           message:
-    //           err.message || "Some error occurred while Get the exerciseUpload."
-    //       });
-    //   }
-}
-
