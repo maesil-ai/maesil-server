@@ -12,8 +12,6 @@ module.exports = app => {
        res.send({
            "message": "exercise 업로드 성공"
        })
-
-    //    res.json(exerciseFile);
    })
 
   
