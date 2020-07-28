@@ -5,9 +5,13 @@ const s3Api = require('../config/s3Api');
 module.exports = app => {
 
    router.post('/', s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }]), async function(req,res){
-       console.log(req.files.exercise[0].location)
-       console.log(req.files.thumbnail)
 
+       console.log(req.body, "body")
+       console.log(req.body.files, "files")
+       console.log(req.files.exercise,"exercise")
+
+      
+       
        const exerciseInfo = {
         user_id : 1,
         title: req.body.title,

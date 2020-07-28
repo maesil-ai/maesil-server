@@ -1,33 +1,23 @@
 const db = require("../models");
 const User = db.users;
 const Op = db.Sequelize.Op;
+const UserService = require('../services/userService')
 
-
-exports.signUp = (req,res) => {
-    // console.log("회원가입 API")
-
-    // const userInfo = {
-    //     useremail: req.body.useremail,
-    //     password: req.body.password,
-    //     name: req.body.name
-    // }
-
-    // User.create(userInfo)
-    // .then(data => {
-    //     res.send({
-    //         message: "회원가입 성공",
-    //         code: 200
-    //     })
-    // })
-    // .catch(err => {
-    //     res.status(500).send({
-    //       message:
-    //         err.message || "Some error occurred while creating the UserInfo."
-    //     });
-    //   });
-}
-
-exports.testFunction = (req,res) => {
-    res.render
-
-}
+exports.userInfo = async (req,res) => {
+    const user_id = req.params.user_id
+    let result;
+    try{
+      result =  await UserService.userInfoService(user_id)
+      console.log(result)
+      res.send({
+            message: "user 정보조회 성공",
+            code: 200,
+            result: result
+        })
+    }catch(err){
+        res.status(500).send({
+            message:
+            err.message || "Some error occurred while Get the UserInfo."
+        });
+    }
+} 

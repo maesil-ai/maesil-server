@@ -5,7 +5,7 @@ module.exports = app => {
 
   
    router.get("/", exercises.exerciseAllInfo); // exercise 전체보기
-   router.get("/:exercise_id", exercises.exerciseOneInfo); // exercise 상세보기 
+   router.get("/:exercise_id", exercises.exerciseOneInfo); // exercise 상세보기
    router.post("/:exercise_id/history", exerciseHistory.exerciseHistoryPost); // 운동 결과 전송 API
 
   
