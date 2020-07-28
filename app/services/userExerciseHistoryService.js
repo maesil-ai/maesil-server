@@ -8,3 +8,13 @@ exports.exerciseHistoryPostService = async (historyInfo) => {
 
     return result;
 }
+
+exports.exerciseHistoryInfoService = async (user_id) => {
+    let result = ExerciseHistory.findAll({
+        where: {
+            user_id: user_id
+        }
+    })
+
+    return result;
+}

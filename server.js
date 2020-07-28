@@ -2,13 +2,6 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const app = express();
-const path = require("path")
-const https = require("https")
-const sslport = 443;
-const fs = require('fs')
-
-// const clientApp = path.join(__dirname, './client/build')
-
 
 // var corsOptions = {
 //     origin: "http://localhost:8081"
@@ -43,6 +36,7 @@ require("./app/routes/userRoute")(app);
 require("./app/routes/exerciseRoute")(app);
 require('./app/routes/tagRoute')(app);
 require('./app/routes/s3Route')(app);
+require('./app/routes/exerciseHistoryRoute')(app);
 
     
 
