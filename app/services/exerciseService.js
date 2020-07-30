@@ -22,14 +22,6 @@ exports.exerciseOneInfoService = async (exercise_id) => {
 
     await result.increment('view_counts', {by:1});
     return result;
-
-    // Exercise.findByPk(exercise_id).then(exercise =>{
-    //     return exercise.increment('view_counts', {by: 1}).then(
-    //         result => {
-    //             return exercise;
-    //         }
-    //     )
-    // })
 }
 
 exports.exerciseUploadService = async(exercise_info) => {
@@ -41,6 +33,7 @@ exports.exerciseUploadService = async(exercise_info) => {
         thumb_url: exercise_info.thumb_url,
         video_url: exercise_info.video_url,
         reward: exercise_info.reward,
+        skeleton: exercise_info.skeleton,
         level: exercise_info.level,
         tag_id: exercise_info.tag_id
     })
