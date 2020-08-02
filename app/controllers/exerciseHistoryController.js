@@ -1,4 +1,4 @@
-const exerciseService = require('../services/userExerciseHistoryService');
+const exerciseHistoryService = require('../services/userExerciseHistoryService');
 
 exports.exerciseHistoryPost = async (req,res)=>{
     let exercise_id = req.params.exercise_id
@@ -13,7 +13,7 @@ exports.exerciseHistoryPost = async (req,res)=>{
     }
 
     try{
-        let result = await exerciseService.exerciseHistoryPostService(historyInfo)
+        let result = await exerciseHistoryService.exerciseHistoryPostService(historyInfo)
         res.send({
             message: "exercise 결과 전송 성공",
             code: 200,
@@ -26,4 +26,22 @@ exports.exerciseHistoryPost = async (req,res)=>{
           });
     } 
     
+}
+
+
+exports.exerciseHistoryInfo = async (req,res) =>{
+    let user_id = 1
+    try{
+        let result = await exerciseHistoryService.exerciseHistoryInfoService(user_id);
+        res.send({
+            message: "운동기록 보기 성공",
+            code: 200,
+            result: result
+        })
+    }catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while Get the exerciseHistoryInfo."
+          });
+    }
 }

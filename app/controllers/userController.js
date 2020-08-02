@@ -4,10 +4,11 @@ const Op = db.Sequelize.Op;
 const UserService = require('../services/userService')
 
 exports.userInfo = async (req,res) => {
-    const user_id = req.params.user_id
+    const token = req.verifiedToken
+    console.log(token.user_email)
     let result;
     try{
-      result =  await UserService.userInfoService(user_id)
+      result =  await UserService.userInfoService(token.user_email)
       console.log(result)
       res.send({
             message: "user 정보조회 성공",

@@ -20,7 +20,15 @@ module.exports = app => {
         tag_id: req.body.tag_id
     }
 
-       await exerciseService.exerciseUploadService(exerciseInfo)
+    try{
+        await exerciseService.exerciseUploadService(exerciseInfo)
+    }catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while Get the Kakao Login"
+          });
+    } 
+    
        res.send({
            "code": 200,
            "message": "exercise 업로드 성공"

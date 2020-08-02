@@ -37,6 +37,7 @@ require("./app/routes/exerciseRoute")(app);
 require('./app/routes/tagRoute')(app);
 require('./app/routes/s3Route')(app);
 require('./app/routes/exerciseHistoryRoute')(app);
+require('./app/routes/exerciseLikesRoute')(app);
 
     
 

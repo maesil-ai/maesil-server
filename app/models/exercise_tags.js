@@ -6,11 +6,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         tag_id: 
-         { /* column 속성들 */ 
+         { 
             type: DataTypes.INTEGER, 
             allowNull: false, 
-            // unique: true,
-             /* 여기까지 */ 
         }
         },
         {

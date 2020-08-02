@@ -26,6 +26,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        skeleton:
+        {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
         thumb_url:
         {
             type: DataTypes.STRING

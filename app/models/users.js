@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => { 
     return sequelize.define('users', {
          user_id: 
-         { /* column 속성들 */ 
+         { 
             type: DataTypes.INTEGER, 
             autoIncrement: true,
             allowNull: false, 
             primaryKey: true
             // unique: true,
-             /* 여기까지 */ 
         },
         email:
         {
