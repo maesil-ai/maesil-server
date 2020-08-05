@@ -2,6 +2,9 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const cors = require("cors")
 const app = express();
+const passport = require('passport')
+const session = require('express-session')
+const kakaoKey = require('./app/config/kakaoKey.json')
 
 // var corsOptions = {
 //     origin: "http://localhost:8081"
@@ -17,6 +20,21 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static('/client/build'));
 
+app.use(
+    session({
+        secret: kakaoKey.secretKey,
+        cookie: {
+            maxAge: 60 * 60 * 1000,
+        },
+        resave: true,
+        saveUninitialized: false,
+    })
+)
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 
 const db = require("./app/models");
 db.sequelize.sync(); // sequelize 싱크하기
@@ -31,7 +49,7 @@ app.get('/', (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
 });
 
-require("./app/routes/passportRoute")(app);
+// require("./app/routes/passportRoute")(app);
 require("./app/routes/userRoute")(app);
 require("./app/routes/exerciseRoute")(app);
 require('./app/routes/tagRoute')(app);

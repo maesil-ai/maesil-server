@@ -12,20 +12,37 @@ exports.isUser = async (user_email)=> {
     return result;
 }
 
-exports.signUp = async (user_email, accessToken, nickname)=>{
+exports.signUp = async (user_email, accessToken, profile_image_url)=>{
     await User.create({
         email: user_email,
         password: accessToken,
-        nickname: nickname
+        profile_image_url: profile_image_url,
+        stats: ''
     })
     return;
 }
 
-exports.userInfoService = async(user_email) => {
+exports.userInfoService = async(user_id) => {
     let result = await User.findAll({
         where: {
-            email: user_email
+            user_id: user_id
         }
     })
     return result;
+}
+
+exports.userAddInfoService = async (user_id,nickname, gender, weight, height) => {
+    
+    let result = await User.update({
+        nickname: nickname,
+        gender: gender,
+        weight: weight,
+        height: height
+    },
+    {
+        where: {
+            user_id: user_id
+        }
+    })
+
 }
