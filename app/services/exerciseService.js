@@ -38,6 +38,8 @@ exports.exerciseUploadService = async(exercise_info) => {
         tag_id: exercise_info.tag_id
     })
 
+    console.log(result, "exercise Upload Service result")
+
     await ExerciseTag.create({
         exercise_id: result.exercise_id,
         tag_id: exercise_info.tag_id

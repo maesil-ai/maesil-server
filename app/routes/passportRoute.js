@@ -8,18 +8,18 @@ const secret_config = require('../config/secret')
 
 module.exports = function(app) {
     var router = require("express").Router();
-    app.use(
-        session({
-            secret: kakaoKey.secretKey,
-            cookie: {
-                maxAge: 60 * 60 * 1000,
-            },
-            resave: true,
-            saveUninitialized: false,
-        })
-    )
-    app.use(passport.initialize())
-    app.use(passport.session())
+    // app.use(
+    //     session({
+    //         secret: kakaoKey.secretKey,
+    //         cookie: {
+    //             maxAge: 60 * 60 * 1000,
+    //         },
+    //         resave: true,
+    //         saveUninitialized: false,
+    //     })
+    // )
+    // app.use(passport.initialize())
+    // app.use(passport.session())
     
     passport.use(
         'login-kakao',
@@ -48,7 +48,6 @@ module.exports = function(app) {
         })
     )
     passport.serializeUser(function(user, done){
-         
         done(null, user);
     })
     passport.deserializeUser(function(user,done){
@@ -59,18 +58,17 @@ module.exports = function(app) {
     app.get(
     '/oauth',
     passport.authenticate('login-kakao', {
-        successRedirect: 'https://maesil.ai/auth', 
+        successRedirect: '/social/success', 
         failureRedirect: '/social/fail',
     }))
 
    
     app.get('/kakao/logout', function(req,res){
        req.logout();
-       res.redirect('/');
-        
+       res.redirect('/');  
     })
 
-    app.get('/social/success', async function (req, res) {
+    app.get('/social/success',function (req, res) {
 
         console.log(req.session, "session")
         console.log(req.session.passport._json, "_json")
@@ -78,7 +76,8 @@ module.exports = function(app) {
         console.log(req.session.passport.user.user_id, "user_id test")
      
       
-        return res.redirect('https://maesil.ai/auth')
+        // return res.redirect('https://maesil.ai/auth')
+        return res.redirect('https://maesil.ai')
     
         // return res.json({
         // isSuccess: true,

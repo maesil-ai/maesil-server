@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         play_time:
         {
-            type: DataTypes.TIME,
+            type: DataTypes.FLOAT,
         },
         user_id:
         {
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         skeleton:
         {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT('long'),
             allowNull: false
         },
         thumb_url:

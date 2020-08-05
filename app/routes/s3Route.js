@@ -5,8 +5,6 @@ const s3Api = require('../config/s3Api');
 module.exports = app => {
 
    router.post('/', s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }]), async function(req,res){
-       console.log(req.body.skeleton)
-       console.log(req.body)
        const exerciseInfo = {
         user_id : 1,
         title: req.body.title,
@@ -23,13 +21,12 @@ module.exports = app => {
     try{
         await exerciseService.exerciseUploadService(exerciseInfo)
     }catch(err){
-        res.status(500).send({
+        return res.status(500).send({
             message:
-              err.message || "Some error occurred while Get the Kakao Login"
+              err.message || "Some error occurred while Get the S3 upload"
           });
     } 
-    
-       res.send({
+       return res.send({
            "code": 200,
            "message": "exercise 업로드 성공"
        })
