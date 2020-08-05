@@ -36,11 +36,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         level:
         {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         },
         points:
         {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         },
         status:
         {

@@ -26,7 +26,6 @@ exports.exerciseOneInfo = async (req,res) => {
 
     try{
         let result = await exerciseService.exerciseOneInfoService(exercise_id)
-
         if(result === null){
             return res.send({
                 message: "exercise 정보 없음",
@@ -34,7 +33,6 @@ exports.exerciseOneInfo = async (req,res) => {
                 result: result
             })
         }
-
         let isLikeResult = exerciseLikes.isLikeService(user_id, exercise_id)
         if(isLikeResult < 1){
             console.log(result)
@@ -58,3 +56,24 @@ exports.exerciseOneInfo = async (req,res) => {
 
 }
 
+
+exports.exerciseDeleteOne = async (req,res) => {
+    const user_id = req.verifiedToken.user_id
+    const exercise_id = req.params.exercise_id
+
+    let exerciseIsUser = await exerciseService.exerciseIsUserService(exercise_id, user_id)
+    
+    if(exerciseIsUser.length < 1){
+        return res.send({
+            message: "삭제 권한이 없습니다",
+            code: 403
+        })
+    }
+
+    let result = await exerciseService.exerciseDeleteService(exercise_id)
+
+    res.send({
+        message: "exercise 삭제 성공",
+        code: 200
+    })
+}

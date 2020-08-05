@@ -26,7 +26,6 @@ exports.userInfo = async (req,res) => {
 } 
 
 exports.userSignUp = async (req,res) => {
-
     const user_info = {
         id: req.body.id,
         profile_image_url: req.body.profile_image_url,
@@ -36,18 +35,19 @@ exports.userSignUp = async (req,res) => {
     console.log(user_info);
     try{
       let isSignInUser = await UserService.isUser(user_info.id)
-      let token = await jwt.sign(
-        {
-            user_id: isSignInUser[0].user_id
-        },
-        secret_config.jwtsecret,
-        {
-            expiresIn: 7200,
-            subject: 'userInfo'
-        }
-    )
       if(isSignInUser.length >= 1){
 
+        console.log(isSignInUser, "isSignInUser")
+        let token = await jwt.sign(
+            {
+                user_id: isSignInUser[0].user_id
+            },
+            secret_config.jwtsecret,
+            {
+                expiresIn: 7200,
+                subject: 'userInfo'
+            }
+        )
         console.log(isSignInUser.length, "length check")
         res.send({
             message: "로그인 성공",
@@ -56,14 +56,23 @@ exports.userSignUp = async (req,res) => {
         })
       } else{
           let result =  await UserService.signUp(user_info.id, user_info.access_token, user_info.profile_image_url)
-      console.log(result)
-      res.send({
-            message: "회원가입 성공",
-            code: 201,
-            jwt: token
-        })
-      }
-    }catch(err){
+            console.log(result)
+            // let token = await jwt.sign(
+            //     {
+            //         user_id: result.user_id
+            //     },
+            //     secret_config.jwtsecret,
+            //     {
+            //         expiresIn: 7200,
+            //         subject: 'userInfo'
+            //     }
+            // )
+            res.send({
+                    message: "회원가입 성공",
+                    code: 201
+                })
+        }
+        }catch(err){
         res.status(500).send({
             message:
             err.message || "Some error occurred while Get the UserSignIn || SignUp."

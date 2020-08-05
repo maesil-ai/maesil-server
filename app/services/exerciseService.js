@@ -47,3 +47,26 @@ exports.exerciseUploadService = async(exercise_info) => {
 
     return result;
 }
+
+exports.exerciseIsUserService = async(exercise_id, user_id) => {
+    let result = await Exercise.findAll({
+        where:{
+            exercise_id: exercise_id,
+            user_id: user_id   
+        }
+    })
+
+    return result;
+}
+
+exports.exerciseDeleteService = async(exercise_id) => {
+    await Exercise.update({
+        status: 'DELETED'
+    },
+    {
+        where: {
+            exercise_id : exercise_id
+        }
+    }
+    )
+}

@@ -23,7 +23,7 @@ exports.signUp = async (user_email, accessToken, profile_image_url)=>{
 }
 
 exports.userInfoService = async(user_id) => {
-    let result = await User.findAll({
+    let result = await User.findOne({
         where: {
             user_id: user_id
         }
@@ -32,7 +32,6 @@ exports.userInfoService = async(user_id) => {
 }
 
 exports.userAddInfoService = async (user_id,nickname, gender, weight, height) => {
-    
     let result = await User.update({
         nickname: nickname,
         gender: gender,
@@ -44,5 +43,4 @@ exports.userAddInfoService = async (user_id,nickname, gender, weight, height) =>
             user_id: user_id
         }
     })
-
 }

@@ -2,11 +2,11 @@
 let router = require("express").Router();
 const exerciseService = require('../services/exerciseService')
 const s3Api = require('../config/s3Api');
+const jwtMiddleware = require('../config/jwtMiddleware')
 module.exports = app => {
-
-   router.post('/', s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }]), async function(req,res){
+   router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }]), async function(req,res){
        const exerciseInfo = {
-        user_id : 1,
+        user_id : req.verifiedToken.user_id,
         title: req.body.title,
         description: req.body.description,
         play_time: req.body.play_time,

@@ -1,5 +1,6 @@
 const db = require("../models");
 const Exercise_Likes = db.user_exercise_likes;
+const User = db.User;
 const Exercise = db.exercises;
 const Op = db.Sequelize.Op;
 
@@ -40,4 +41,35 @@ exports.exerciseDislikesService = async(user_id, exercise_id)=>{
         'like_counts', {by: 1, where: {exercise_id: exercise_id}}
     )
     return;
+}
+
+// 좋아요 한 영상 보기
+exports.userExerciseLikeInfoService = async (user_id) => {
+    // let result = await Exercise_Likes.findAll({
+    //     where: {
+    //         user_id: user_id
+    //     }
+    // })
+
+    let result = await Exercise_Likes.findAll({
+        where: {
+            user_id: user_id
+        },
+        include: [
+            {
+                model: Exercise,
+                required: false,
+                attributes: ['exercise_id','title', 'thumb_url', 'video_url', 'play_time', 'like_counts','view_counts'],
+            },
+            // {
+            //     model: User,
+            //     required: false,
+            //     attributes: ['nickname']
+            // }
+        ],
+        raw: true
+    })
+
+    
+    return result;
 }
