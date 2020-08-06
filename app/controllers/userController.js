@@ -56,20 +56,23 @@ exports.userSignUp = async (req,res) => {
         })
       } else{
           let result =  await UserService.signUp(user_info.id, user_info.access_token, user_info.profile_image_url)
+          let result_isUser = await UserService.isUser(user_info.id);
+          
             console.log(result)
-            // let token = await jwt.sign(
-            //     {
-            //         user_id: result.user_id
-            //     },
-            //     secret_config.jwtsecret,
-            //     {
-            //         expiresIn: 7200,
-            //         subject: 'userInfo'
-            //     }
-            // )
+            let token = await jwt.sign(
+                {
+                    user_id: result_isUser[0].user_id
+                },
+                secret_config.jwtsecret,
+                {
+                    expiresIn: 7200,
+                    subject: 'userInfo'
+                }
+            )
             res.send({
                     message: "회원가입 성공",
-                    code: 201
+                    code: 201,
+                    jwt: token
                 })
         }
         }catch(err){

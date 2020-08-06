@@ -5,6 +5,7 @@ const s3Api = require('../config/s3Api');
 const jwtMiddleware = require('../config/jwtMiddleware')
 module.exports = app => {
    router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }]), async function(req,res){
+       console.log(req, "s3Api req log")
        const exerciseInfo = {
         user_id : req.verifiedToken.user_id,
         title: req.body.title,

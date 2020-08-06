@@ -59,10 +59,13 @@ exports.exerciseOneInfo = async (req,res) => {
 
 exports.exerciseDeleteOne = async (req,res) => {
     const user_id = req.verifiedToken.user_id
+    console.log(user_id)
     const exercise_id = req.params.exercise_id
 
     let exerciseIsUser = await exerciseService.exerciseIsUserService(exercise_id, user_id)
     
+    console.log(exerciseIsUser, " exerciseIsUser")
+
     if(exerciseIsUser.length < 1){
         return res.send({
             message: "삭제 권한이 없습니다",
