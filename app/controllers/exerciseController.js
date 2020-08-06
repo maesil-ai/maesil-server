@@ -3,8 +3,10 @@ const exerciseLikes = require('../services/userExerciseLikesService')
 
 exports.exerciseAllInfo = async (req,res) => {
     let result;
+    // let user_id = req.verifiedToken.user_id
+    let user_id = 15
     try{
-      result =  await exerciseService.exerciseAllInfoService()
+      result =  await exerciseService.exerciseAllInfoService(user_id)
       res.send({
             message: "exercise 전체 조회 성공",
             code: 200,
@@ -19,7 +21,7 @@ exports.exerciseAllInfo = async (req,res) => {
 }
 
 exports.exerciseOneInfo = async (req,res) => {
-    let user_id = 1
+    let user_id = 15
     let exercise_id = 1234567;
     exercise_id = req.params.exercise_id
     console.log("exercise log",exercise_id)

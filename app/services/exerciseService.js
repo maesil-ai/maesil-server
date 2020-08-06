@@ -1,19 +1,42 @@
 const db = require("../models");
 const userRoute = require("../routes/userRoute");
+const { sequelize } = require("../models");
 const Exercise = db.exercises;
 const ExerciseTag = db.exercise_tags;
+const Exercise_Likes = db.user_exercise_likes
 const Op = db.Sequelize.Op;
 
-exports.exerciseAllInfoService = async () =>{
+exports.exerciseAllInfoService = async (user_id) =>{
     console.log("exerciseAllInfoService Test")
-   let result = await Exercise.findAll({
-       where: {
-        status: 'ACTIVE'
-       },
-       order: [
-           ['view_counts', 'DESC']
-       ]
+//    let result = await Exercise.findAll({
+//        where: {
+//         status: 'ACTIVE'
+//        },
+//        order: [
+//            ['view_counts', 'DESC']
+//        ]
+//     })
+    
+    let result = await Exercise.findAll({
+        attributes: {
+            include: [
+                [
+                    sequelize.literal(`(
+                        SELECT COUNT(*) FROM user_exercise_likes AS ul
+                        WHERE exercises.exercise_id = ul.exercise_id
+                        AND user_id = '${user_id}'
+                    )
+                    `),
+                    'isLike'
+                ]
+            ]
+        },
+        where: {
+            status: 'ACTIVE'
+        }
     })
+
+
     return result;
 }
 
@@ -52,7 +75,8 @@ exports.exerciseIsUserService = async(exercise_id, user_id) => {
     let result = await Exercise.findAll({
         where:{
             exercise_id: exercise_id,
-            user_id: user_id   
+            user_id: user_id,
+            status: 'ACTIVE'   
         }
     })
 

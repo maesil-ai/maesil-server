@@ -12,7 +12,8 @@ exports.exerciseHistoryPostService = async (historyInfo) => {
 exports.exerciseHistoryInfoService = async (user_id) => {
     let result = ExerciseHistory.findAll({
         where: {
-            user_id: user_id
+            user_id: user_id,
+            status: 'ACTIVE'
         }
     })
 

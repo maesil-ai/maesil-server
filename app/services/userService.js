@@ -43,4 +43,6 @@ exports.userAddInfoService = async (user_id,nickname, gender, weight, height) =>
             user_id: user_id
         }
     })
+
+    return result;
 }

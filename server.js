@@ -49,14 +49,14 @@ app.get('/', (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
 });
 
-// require("./app/routes/passportRoute")(app);
+
 require("./app/routes/userRoute")(app);
 require("./app/routes/exerciseRoute")(app);
 require('./app/routes/tagRoute')(app);
 require('./app/routes/s3Route')(app);
 require('./app/routes/exerciseHistoryRoute')(app);
 require('./app/routes/exerciseLikesRoute')(app);
-
+require('./app/routes/channelRoute')(app);
     
 
 // set port, listen for requests
