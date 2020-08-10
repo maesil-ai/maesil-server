@@ -1,13 +1,12 @@
 module.exports = (sequelize, DataTypes) => { 
     return sequelize.define('users', {
          user_id: 
-         { /* column 속성들 */ 
+         { 
             type: DataTypes.INTEGER, 
             autoIncrement: true,
             allowNull: false, 
             primaryKey: true
             // unique: true,
-             /* 여기까지 */ 
         },
         email:
         {
@@ -21,8 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         nickname:
         { 
-            type: DataTypes.STRING(10),
-            allowNull: false, 
+            type: DataTypes.STRING(10)
         },
         gender:
         {
@@ -38,11 +36,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         level:
         {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         },
         points:
         {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER,
+            defaultValue: 0
         },
         status:
         {
@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         updated_at: 
         {
             type: 'TIMESTAMP',
-            defaultValue: DataTypes.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+            defaultValue: DataTypes.literal('CURRENT_TIMESTAMP'),
             allowNull: false
         }
         },

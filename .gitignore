@@ -6,4 +6,3 @@ log/*
 app/config
 docker-compose.yml
 app/build
-app/routes/s3Route.js

@@ -1,14 +1,19 @@
 module.exports = (sequelize, DataTypes) => { 
-    return sequelize.define('exercises', {
-        exercise_id: 
+    return sequelize.define('courses', {
+        course_id: 
          {
             type: DataTypes.INTEGER, 
             autoIncrement: true,
             allowNull: false, 
             primaryKey: true,
-            
+           
         },
-        title:
+        exercise_list:
+        {
+            type: DataTypes.TEXT,
+            allowNull: false
+        },
+        course_name:
         {
             type: DataTypes.STRING,
             allowNull: false
@@ -19,41 +24,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         play_time:
         {
-            type: DataTypes.FLOAT,
+            type: DataTypes.TIME,
         },
         user_id:
         {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        skeleton:
-        {
-            type: DataTypes.TEXT('long'),
-            allowNull: false
-        },
         thumb_url:
         {
             type: DataTypes.STRING
-        },
-        video_url:
-        {
-            type: DataTypes.STRING,
-            allowNull: false,
         },
         reward:
         {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
-        },
-        level:
-        {
-            type: DataTypes.INTEGER,
-            defaultValue: 0
-        },
-        tag_id:
-        {
-            type: DataTypes.INTEGER,
         },
         like_counts:
         {

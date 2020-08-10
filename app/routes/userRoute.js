@@ -1,16 +1,11 @@
-module.exports = app => {
-    const users = require("../controllers/userController.js");
-  
-    var router = require("express").Router();
- 
+module.exports = (app) => {
+  const users = require("../controllers/userController.js");
+  const jwtMiddleware = require("../config/jwtMiddleware");
 
-  
-    // // Create a new Tutorial
-    // router.post("/", tutorials.create);
-    router.post("/", users.signUp);
+  var router = require("express").Router();
 
-
-  
-    app.use('/api/user', router);
-  };
-  
+  router.post("/", users.userSignUp); // 회원가입 & 로그인
+  router.post("/info", jwtMiddleware, users.userAddInfo); // 유저 추가 정보 입력
+  router.get("/", jwtMiddleware, users.userInfo); // 유저 정보보기
+  app.use("/users", router);
+};
