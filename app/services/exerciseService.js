@@ -6,16 +6,23 @@ const ExerciseTag = db.exercise_tags;
 const Exercise_Likes = db.user_exercise_likes
 const Op = db.Sequelize.Op;
 
+exports.exerciseAllInfoNoUserService = async() => {
+
+       let result = await Exercise.findAll({
+       where: {
+        status: 'ACTIVE'
+       },
+       order: [
+           ['view_counts', 'DESC']
+       ]
+    })
+    
+    return result;
+    
+}
+
 exports.exerciseAllInfoService = async (user_id) =>{
     console.log("exerciseAllInfoService Test")
-//    let result = await Exercise.findAll({
-//        where: {
-//         status: 'ACTIVE'
-//        },
-//        order: [
-//            ['view_counts', 'DESC']
-//        ]
-//     })
     
     let result = await Exercise.findAll({
         attributes: {
@@ -35,14 +42,35 @@ exports.exerciseAllInfoService = async (user_id) =>{
             status: 'ACTIVE'
         }
     })
+    return result;
+}
 
+exports.exerciseOneInfoService = async (user_id, exercise_id) => {
+    let result = await Exercise.findOne({
+        attributes: {
+            include: [
+                [
+                    sequelize.literal(`(
+                        SELECT COUNT(*) FROM user_exercise_likes AS ul
+                        WHERE exercises.exercise_id = ul.exercise_id
+                        AND user_id = '${user_id}'
+                    )
+                    `),
+                    'isLike'
+                ]
+            ]
+        },
+        where: {
+            exercise_id: exercise_id
+        }
+    })
 
     return result;
 }
 
-exports.exerciseOneInfoService = async (exercise_id) => {
-    let result = await Exercise.findByPk(exercise_id);
 
+exports.exerciseOneInfoNoUserService = async(exercise_id)=>{
+    let result = await Exercise.findByPk(exercise_id);
     await result.increment('view_counts', {by:1});
     return result;
 }

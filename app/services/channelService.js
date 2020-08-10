@@ -24,8 +24,6 @@ exports.channelInfoService = async(nickname) => {
             ]
         }
     })
-
-
     // let result = await Exercise.findAll({
     //     include: [
     //         {
