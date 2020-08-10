@@ -32,8 +32,14 @@ exports.exerciseLikesService = async(user_id, exercise_id) => {
 exports.exerciseDislikesService = async(user_id, exercise_id)=>{
     await Exercise_Likes.destroy({
         where: {
-            user_id: user_id,
-            exercise_id: exercise_id
+            [Op.and]:[
+                {
+                    user_id: user_id
+                },
+                {
+                    exercise_id: exercise_id
+                }
+            ]
         }
     })
 
