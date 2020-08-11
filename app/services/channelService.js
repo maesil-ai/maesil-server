@@ -4,71 +4,29 @@ const { sequelize } = require("../models");
 const Exercise = db.exercises;
 const User = db.users;
 const User_Channel = db.user_channel_likes
-const Op = db.Sequelize.Op;9
+const Op = db.Sequelize.Op;
 
-
-
-exports.channelInfoNoUserService = async(nickname) => {
-
+exports.channelInfoService = async(channel_id) => {
     let result = await Exercise.findAll({
         include: [
             {
                 model: User,
                 required: true,
-                attributes: ['nickname']
+                attributes: ['nickname', 'user_id']
             }
         ],
         raw: true,
-        where: {
-            status: 'ACTIVE'
-        }
-    })
-
-    result.push({
-        isLike: 0
-    })
-
-    return result;
-
-}
-exports.channelInfoService = async(user_id,nickname) => {
-    let result = await Exercise.findAll({
-        include: [
-            {
-                model: User,
-                required: true,
-                attributes: ['nickname']
-            }
-        ],
-        raw: true,
-        where: {
-            status: 'ACTIVE'
-        }
-    })
-
-    let userIsLikeResult = await User_Channel.findOne({
         where: {
             [Op.and]:[
                 {
-                    user_id: user_id
+                    status: 'ACTIVE'
                 },
                 {
-                    channel_id: result[0].user_id
+                    'user_id': channel_id
                 }
             ]
         }
     })
-    
-    if(userIsLikeResult){
-        result.push({
-            isLike: 1
-        })
-    }else{
-        result.push({
-            isLike: 0
-        })
-    }
-    console.log(userIsLikeResult)
 
     console.log(result)
     return result;
@@ -101,5 +59,78 @@ exports.channelDislikesService = async(user_id, channel_id) => {
 
     return;
 }
+
+exports.channelSubscribeInfoNoUserService = async(channel_id) => {
+    let result = await User.findOne({
+        attributes: {
+            exclude: [
+                'password',
+                'gender',
+                'weight',
+                'height',
+                'points',
+                'created_at',
+                'updated_at'
+            ],
+            include: [
+                [
+                    sequelize.literal(`(
+                        SELECT COUNT(*) FROM user_channel_likes AS ucl
+                        WHERE ucl.channel_id = '${channel_id}'
+                        AND users.user_id = ucl.channel_id
+                    )`),
+                    'subscribe'
+                ]
+            ]
+        },
+        where: {
+            user_id : channel_id
+        }
+    })
+
+    return result;
+}
+
+exports.channelSubscribeInfoService = async(user_id, channel_id) => {
+    let result = await User.findOne({
+        attributes: {
+            exclude: [
+                'password',
+                'gender',
+                'weight',
+                'height',
+                'points',
+                'created_at',
+                'updated_at'
+            ],
+            include: [
+                [
+                    sequelize.literal(`(
+                        SELECT COUNT(*) FROM user_channel_likes AS ucl
+                        WHERE ucl.channel_id = '${channel_id}'
+                        AND users.user_id = ucl.channel_id
+                    )`),
+                    'subscribe'
+                ],
+                [
+                    sequelize.literal(`(
+                        SELECT COUNT(*) FROM user_channel_likes AS ucl
+                        WHERE ucl.channel_id = '${channel_id}'
+                        AND ucl.user_id = '${user_id}'
+                    )`),
+                    'isLike'
+                ]
+            ]
+        },
+        where: {
+            user_id: channel_id
+        }
+    })
+    return result;
+}
+
+
+
+
 
 exports.channel
