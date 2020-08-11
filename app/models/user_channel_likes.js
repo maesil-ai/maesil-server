@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        channel_name: 
-         { 
-            type: DataTypes.STRING, 
-            allowNull: false, 
+        channel_id:
+        {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
         },
         {

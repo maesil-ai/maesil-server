@@ -39,6 +39,9 @@ db.course_tags = require('./course_tags')(sequelize, Sequelize);
 db.exercises.belongsToMany(db.user_exercise_likes, {through: 'userLikeExercise'});
 db.user_exercise_likes.belongsToMany(db.exercises, {through: 'userLikeExercise'});
 
+db.exercises.belongsTo(db.users, {foreignKey: 'user_id'});
+db.users.hasMany(db.exercises, {foreignKey: 'user_id'});
+
 
 module.exports = db;
 
