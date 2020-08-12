@@ -101,6 +101,14 @@ exports.userAddInfo = async (req,res) => {
         code: 200,
         result: result
     })
-    
-      
 } 
+
+exports.userSubscribeInfo = async(req,res) => {
+    const token = req.verifiedToken
+    let result = await UserService.userSubscribeService(token.user_id)
+    res.send({
+        message: "구독한 채널 List 조회 성공",
+        message: 200,
+        result: result
+    })
+}
