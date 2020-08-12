@@ -62,3 +62,17 @@ exports.userSubscribeService = async(user_id) => {
 
    return result;
 }
+
+exports.userNameToIdService = async(nickname) => {
+    let result = await User.findOne({
+        attributes: [
+            'user_id',
+            'nickname'
+        ],
+        where: {
+            nickname: nickname
+        }
+    })
+
+    return result;
+}

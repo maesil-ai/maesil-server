@@ -108,7 +108,18 @@ exports.userSubscribeInfo = async(req,res) => {
     let result = await UserService.userSubscribeService(token.user_id)
     res.send({
         message: "구독한 채널 List 조회 성공",
-        message: 200,
+        code: 200,
+        result: result
+    })
+}
+
+exports.userNameToId = async(req,res)=>{
+    const nickname = req.query.nickname
+    let result = await UserService.userNameToIdService(nickname);
+
+    res.send({
+        message: "Name To Id",
+        code: 200,
         result: result
     })
 }
