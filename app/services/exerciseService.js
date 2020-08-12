@@ -104,6 +104,7 @@ exports.exerciseUploadService = async(exercise_info) => {
         play_time: exercise_info.play_time,
         thumb_url: exercise_info.thumb_url,
         video_url: exercise_info.video_url,
+        thumb_gif_url: exercise_info.thumb_gif_url,
         reward: exercise_info.reward,
         skeleton: exercise_info.skeleton,
         level: exercise_info.level,

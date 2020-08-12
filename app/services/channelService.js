@@ -27,8 +27,6 @@ exports.channelInfoService = async(channel_id) => {
             ]
         }
     })
-
-    console.log(result)
     return result;
 }
 

@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         {
             type: DataTypes.STRING
         },
+        thumb_gif_url:
+        {
+            type: DataTypes.STRING
+        },
         video_url:
         {
             type: DataTypes.STRING,
