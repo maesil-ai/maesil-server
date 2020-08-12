@@ -9,6 +9,11 @@ const Op = db.Sequelize.Op;
 
 exports.exerciseAllInfoNoUserService = async() => {
        let result = await Exercise.findAll({
+       attributes:{
+        exclude: [
+            'skeleton'
+        ]
+       },
        include: [
            {
                model: User,
@@ -39,6 +44,9 @@ exports.exerciseAllInfoService = async (user_id) =>{
         ],
         raw: true,
         attributes: {
+            exclude: [
+                'skeleton'
+            ],
             include: [
                 [
                     sequelize.literal(`(
