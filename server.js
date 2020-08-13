@@ -57,6 +57,7 @@ require('./app/routes/s3Route')(app);
 require('./app/routes/exerciseHistoryRoute')(app);
 require('./app/routes/exerciseLikesRoute')(app);
 require('./app/routes/channelRoute')(app);
+require('./app/routes/courseRoute')(app);
     
 
 // set port, listen for requests

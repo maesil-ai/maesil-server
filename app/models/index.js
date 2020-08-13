@@ -26,7 +26,7 @@ db.users = require('./users')(sequelize, Sequelize);
 db.exercises = require('./exercises')(sequelize, Sequelize);
 db.tags = require('./tags')(sequelize, Sequelize);
 db.user_exercise_history = require('./user_exercise_history')(sequelize, Sequelize);
-// db.courses = require('./courses')(sequelize, Sequelize);
+db.courses = require('./courses')(sequelize, Sequelize);
 
 db.users_tag_likes = require('./users_tag_likes')(sequelize, Sequelize);
 db.user_exercise_likes = require('./user_exercise_likes')(sequelize, Sequelize);
