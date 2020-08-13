@@ -4,7 +4,7 @@ const exerciseService = require('../services/exerciseService')
 const s3Api = require('../config/s3Api');
 const jwtMiddleware = require('../config/jwtMiddleware')
 module.exports = app => {
-   router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }]), async function(req,res){
+   router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }, {name: 'gif_thumbnail'}]), async function(req,res){
        console.log(req, "s3Api req log")
        const exerciseInfo = {
         user_id : req.verifiedToken.user_id,
@@ -13,6 +13,7 @@ module.exports = app => {
         play_time: req.body.play_time,
         thumb_url: req.files.thumbnail[0].location,
         video_url: req.files.exercise[0].location,
+        thumb_gif_url: req.files.gif_thumbnail[0].location,
         reward: req.body.reward,
         skeleton: req.body.skeleton,
         level: req.body.level,

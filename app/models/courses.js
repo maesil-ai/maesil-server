@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         exercise_list:
         {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT('long'),
             allowNull: false
         },
         course_name:
@@ -35,11 +35,24 @@ module.exports = (sequelize, DataTypes) => {
         {
             type: DataTypes.STRING
         },
+        thumb_gif_url:
+        {
+            type: DataTypes.STRING
+        },
         reward:
         {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
+        },
+        level:
+        {
+            type: DataTypes.INTEGER,
+            defaultValue: 0
+        },
+        tag_id:
+        {
+            type: DataTypes.INTEGER,
         },
         like_counts:
         {
