@@ -16,9 +16,9 @@ app.use(cors())
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static(path.join(__dirname, '/app/public')));
 
-app.use(express.static('/client/build'));
+
+
 
 app.use(
     session({
@@ -37,7 +37,7 @@ app.use(passport.session());
 
 
 const db = require("./app/models");
-db.sequelize.sync(); // sequelize 싱크하기
+db.sequelize.sync();
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
@@ -45,7 +45,7 @@ db.sequelize.sync(); // sequelize 싱크하기
 
 
 // simple route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
 });
 
