@@ -28,3 +28,20 @@ exports.courseAllInfoNoUserService = async()=>{
 
     return result;
 }
+
+exports.courseOneInfoNoUserService = async(course_id) => {
+    let result = await Course.findOne({
+        where: {
+            [Op.and]:[
+                {
+                    status: 'ACTIVE'
+                },
+                {
+                    'course_id': course_id
+                }
+            ]
+        }
+    })
+
+    return result;
+}

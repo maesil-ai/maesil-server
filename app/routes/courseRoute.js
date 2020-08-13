@@ -35,6 +35,8 @@ module.exports = app => {
    });
 
     router.get('/', courseController.courseAllInfo);
+    router.get('/:course_id', courseController.courseOneInfo);
+    
 
   
     app.use('/courses', router);
