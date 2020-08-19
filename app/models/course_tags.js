@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => { 
-    return sequelize.define('user_exercise_likes', {
-        user_id:
+    return sequelize.define('course_tags', {
+        course_id:
         {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        exercise_id: 
-         { 
+        tag_id: 
+         {  
             type: DataTypes.INTEGER, 
             allowNull: false, 
         }
@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
             indexes: [
                 {
                     unique: true,
-                    fields: ['user_id','exercise_id']
+                    fields: ['course_id','tag_id']
                 }
             ],
             timestamps: false
         });
-}
+    }
