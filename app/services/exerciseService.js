@@ -107,17 +107,10 @@ exports.exerciseUploadService = async(exercise_info) => {
         thumb_gif_url: exercise_info.thumb_gif_url,
         reward: exercise_info.reward,
         skeleton: exercise_info.skeleton,
-        level: exercise_info.level,
-        tag_id: exercise_info.tag_id
+        level: exercise_info.level
     })
 
     console.log(result, "exercise Upload Service result")
-
-    await ExerciseTag.create({
-        exercise_id: result.exercise_id,
-        tag_id: exercise_info.tag_id
-    })
-
     return result;
 }
 

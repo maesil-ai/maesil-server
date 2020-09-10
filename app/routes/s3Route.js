@@ -1,11 +1,13 @@
 
 let router = require("express").Router();
 const exerciseService = require('../services/exerciseService')
+const tagService = require('../services/tagService')
 const s3Api = require('../config/s3Api');
-const jwtMiddleware = require('../config/jwtMiddleware')
+const jwtMiddleware = require('../config/jwtMiddleware');
+const tags = require("../models/tags");
 module.exports = app => {
    router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }, {name: 'gif_thumbnail'}]), async function(req,res){
-       console.log(req, "s3Api req log")
+       console.log(req.body, "s3Api req log")
        const exerciseInfo = {
         user_id : req.verifiedToken.user_id,
         title: req.body.title,
@@ -16,12 +18,18 @@ module.exports = app => {
         thumb_gif_url: req.files.gif_thumbnail[0].location,
         reward: req.body.reward,
         skeleton: req.body.skeleton,
-        level: req.body.level,
-        tag_id: req.body.tag_id
+        level: req.body.level
     }
 
+
+    let tags = JSON.parse(req.body.tags)
+
+    console.log(tags, "tags", tags.length)
     try{
-        await exerciseService.exerciseUploadService(exerciseInfo)
+        const uploadResult = await exerciseService.exerciseUploadService(exerciseInfo)
+        for(let i =0;i<tags.length;i++){
+            await tagService.tagsAddService(uploadResult.exercise_id, tags[i].tag_id)
+        }
     }catch(err){
         return res.status(500).send({
             message:
