@@ -22,11 +22,13 @@ exports.tagSearchInfo = async (req,res) => {
     console.log(req.query.tag_name)
     try{
       let result =  await tagService.tagSearchInfoService(tag_name);
+      let courseResult = await tagService.tagCourseSearchInfoService(tag_name);
       console.log(result)
       res.send({
             message: "tag별 운동조회 성공",
             code: 200,
-            result: result
+            exerciseResult: result,
+            courseResult: courseResult
         })
     }catch(err){
         res.status(500).send({

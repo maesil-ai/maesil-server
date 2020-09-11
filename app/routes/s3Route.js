@@ -4,7 +4,7 @@ const exerciseService = require('../services/exerciseService')
 const tagService = require('../services/tagService')
 const s3Api = require('../config/s3Api');
 const jwtMiddleware = require('../config/jwtMiddleware');
-const tags = require("../models/tags");
+
 module.exports = app => {
    router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }, {name: 'gif_thumbnail'}]), async function(req,res){
        console.log(req.body, "s3Api req log")
