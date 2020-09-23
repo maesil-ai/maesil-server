@@ -5,6 +5,7 @@ const app = express();
 const passport = require('passport')
 const session = require('express-session')
 const kakaoKey = require('./app/config/kakaoKey.json')
+const mongoose = require('mongoose')
 
 // var corsOptions = {
 //     origin: "http://localhost:8081"
@@ -34,6 +35,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+const mongo_db = mongoose.connection;
+mongo_db.on('error', console.error);
+mongo_db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongodb server");
+});
+
+mongoose.connect('mongodb://172.17.0.1/maesil_log')
 
 
 const db = require("./app/models");
@@ -58,6 +67,7 @@ require('./app/routes/exerciseHistoryRoute')(app);
 require('./app/routes/exerciseLikesRoute')(app);
 require('./app/routes/channelRoute')(app);
 require('./app/routes/courseRoute')(app);
+require('./app/routes/testRoute')(app);
     
 
 // set port, listen for requests

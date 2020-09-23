@@ -103,6 +103,11 @@ exports.userAddInfo = async (req,res) => {
     })
 } 
 
+exports.userLocalSignUp = async (req,res) => {
+    
+}
+
+
 exports.userSubscribeInfo = async(req,res) => {
     const token = req.verifiedToken
     let result = await UserService.userSubscribeService(token.user_id)

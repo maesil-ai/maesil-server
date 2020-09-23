@@ -6,6 +6,7 @@ module.exports = app => {
  
 
     router.post("/",users.userSignUp); // 회원가입 & 로그인
+    router.post("/local", ); // local 회원가입
     router.post("/info", jwtMiddleware,users.userAddInfo); // 유저 추가 정보 입력 
     router.get("/", jwtMiddleware, users.userInfo); // 유저 정보보기
 
