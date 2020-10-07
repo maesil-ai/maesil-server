@@ -7,6 +7,7 @@ exports.exerciseHistoryPost = async (req,res)=>{
     const historyInfo = {
         user_id : user_id,
         exercise_id : exercise_id,
+        similarity_value: req.body.similarity_value, 
         score: req.body.score,
         play_time: req.body.play_time,
         kcal: req.body.kcal

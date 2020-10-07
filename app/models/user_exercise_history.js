@@ -19,6 +19,11 @@ module.exports = (sequelize, DataTypes) => {
         {
             type: DataTypes.TIME,
         },
+        similarity_value:
+        {
+            type: DataTypes.FLOAT,
+            defaultValue: 0
+        },
         started_at:
         {
             type: 'TIMESTAMP',

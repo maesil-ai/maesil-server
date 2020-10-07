@@ -6,6 +6,13 @@ const passport = require('passport')
 const session = require('express-session')
 const kakaoKey = require('./app/config/kakaoKey.json')
 const mongoose = require('mongoose')
+// const documentDatabase = require('./app/config/documentDatabase')
+// var MongoClient = require('mongodb').MongoClient,
+//   f = require('util').format,
+//   fs = require('fs');
+
+// let fs = require('fs');
+// let ca = [fs.readFileSync('./rds-combined-ca-bundle.pem')]
 
 // var corsOptions = {
 //     origin: "http://localhost:8081"
@@ -34,6 +41,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+// mongoose.connect("", {
+//     useNewUrlParser: true,
+//     sslValidate: true,
+//     sslCA: fs.readFileSync('./rds-combined-ca-bundle.pem'),
+//     useUnifiedTopology: true
+// }, function(err, client){
+//     if(err) throw err;
+//     console.log("document db success")
+// })
 
 const mongo_db = mongoose.connection;
 mongo_db.on('error', console.error);

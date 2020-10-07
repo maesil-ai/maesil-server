@@ -19,5 +19,12 @@ module.exports = app => {
             res.json({result: 1});
         });
     })
+
+    router.get('/testget', function(req,res){
+       const result =  exercise_logs.find(function(err, exerciseLogs){
+        if(err) return res.status(500).send({error: 'database failure'})
+        res.json(exerciseLogs)
+       })
+    })
     app.use('/test', router);
 };
