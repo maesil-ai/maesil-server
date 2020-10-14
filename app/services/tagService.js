@@ -18,7 +18,6 @@ exports.tagSearchInfoService = async(tag_name)=>{
     ON t.tag_id = et.tag_id WHERE t.tag_name LIKE'%${tag_name}%' OR t.tag_english_name LIKE '%${tag_name}%';`
 
     let result = await db.sequelize.query(query);
-    console.log(result[0])
     return result[0];
 }
 
@@ -29,7 +28,6 @@ exports.tagCourseSearchInfoService = async(tag_name) => {
     ON t.tag_id = ct.tag_id WHERE t.tag_name LIKE'%${tag_name}%' OR t.tag_english_name LIKE '%${tag_name}%';`
 
     let result = await db.sequelize.query(query);
-    console.log(result[0])
     return result[0];
 }
 

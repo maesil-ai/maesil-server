@@ -109,8 +109,6 @@ exports.exerciseUploadService = async(exercise_info) => {
         skeleton: exercise_info.skeleton,
         level: exercise_info.level
     })
-
-    console.log(result, "exercise Upload Service result")
     return result;
 }
 

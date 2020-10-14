@@ -6,10 +6,7 @@ const passport = require('passport')
 const session = require('express-session')
 const kakaoKey = require('./app/config/kakaoKey.json')
 const mongoose = require('mongoose')
-// const documentDatabase = require('./app/config/documentDatabase')
-// var MongoClient = require('mongodb').MongoClient,
-//   f = require('util').format,
-//   fs = require('fs');
+const documentDatabase = require('./app/config/documentDatabase')
 
 // let fs = require('fs');
 // let ca = [fs.readFileSync('./rds-combined-ca-bundle.pem')]
@@ -42,7 +39,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-// mongoose.connect("", {
+const mongo_db = mongoose.connection;
+mongo_db.on('error', console.error);
+mongo_db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongodb server");
+});
+
+// mongoose.connect(documentDatabase.url, {
 //     useNewUrlParser: true,
 //     sslValidate: true,
 //     sslCA: fs.readFileSync('./rds-combined-ca-bundle.pem'),
@@ -51,13 +55,6 @@ app.use(passport.session());
 //     if(err) throw err;
 //     console.log("document db success")
 // })
-
-const mongo_db = mongoose.connection;
-mongo_db.on('error', console.error);
-mongo_db.once('open', function(){
-    // CONNECTED TO MONGODB SERVER
-    console.log("Connected to mongodb server");
-});
 
 mongoose.connect('mongodb://172.17.0.1/maesil_log')
 
