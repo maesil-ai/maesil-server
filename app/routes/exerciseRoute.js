@@ -11,6 +11,7 @@ module.exports = app => {
    router.post("/:exercise_id/history", jwtMiddleware,exerciseHistory.exerciseHistoryPost); // exercise 결과 전송 API
    router.delete("/:exercise_id", jwtMiddleware, exercises.exerciseDeleteOne); // exercise 삭제
   
+   router.post("/:exercise_id", exercises.exercisePoseDataPost); // ML 서버에서 완료 POST
   app.use('/exercises', router);
   };
 

@@ -124,6 +124,21 @@ exports.exerciseIsUserService = async(exercise_id, user_id) => {
     return result;
 }
 
+exports.exercisePoseDataPostService = async(exercise_id, pose_data) => {
+    await Exercise.update(
+        {
+            status: 'ACTIVE',
+            pose_data: pose_data
+        },
+        {
+            where: {
+                exercise_id: exercise_id
+            }
+        }
+    )
+}
+
+
 exports.exerciseDeleteService = async(exercise_id) => {
     await Exercise.update({
         status: 'DELETED'

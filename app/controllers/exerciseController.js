@@ -90,9 +90,26 @@ exports.exerciseOneInfo = async (req,res) => {
                   });
             }  
         })
-
     }
+}
 
+exports.exercisePoseDataPost = async (req,res) => {
+    const exercise_id = req.params.exercise_id
+    const pose_data = req.body.pose_data
+    try{
+        let exerciseResult = await exerciseService.exercisePoseDataPostService(exercise_id, pose_data)
+    
+        res.send({
+            message: "exercise pose data post 성공",
+            code: 200
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while Get the exercise pose data post."
+          });
+    } 
 }
 
 
