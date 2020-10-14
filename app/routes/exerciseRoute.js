@@ -12,7 +12,7 @@ module.exports = app => {
    router.delete("/:exercise_id", jwtMiddleware, exercises.exerciseDeleteOne); // exercise 삭제
   
    router.post("/:exercise_id", exercises.exercisePoseDataPost); // ML 서버에서 완료 POST
-  app.use('/exercises', router);
+   app.use('/exercises', router);
   };
 
   

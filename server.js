@@ -20,8 +20,10 @@ app.use(cors())
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 // app.use(express.static(path.join(__dirname, '/app/public')));
+
+app.use(express.json({limit: '100mb'}));
 
 app.use(express.static('/client/build'));
 
