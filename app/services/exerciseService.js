@@ -35,35 +35,48 @@ exports.exerciseAllInfoNoUserService = async() => {
 exports.exerciseAllInfoService = async (user_id) =>{
     console.log("exerciseAllInfoService Test")
     
-    let result = await Exercise.findAll({
-        include: [
-            {
-                model: User,
-                required: true,
-                attributes: ['nickname']
-            }
-        ],
-        raw: true,
-        attributes: {
-            exclude: [
-                'skeleton'
-            ],
-            include: [
-                [
-                    sequelize.literal(`(
-                        SELECT COUNT(*) FROM user_exercise_likes AS ul
-                        WHERE exercises.exercise_id = ul.exercise_id
-                        AND user_id = '${user_id}'
-                    )
-                    `),
-                    'isLike'
-                ]
-            ]
-        },
-        where: {
-            status: 'ACTIVE'
-        }
-    })
+    // let result = await Exercise.findAll({
+    //     include: [
+    //         {
+    //             model: User,
+    //             required: true,
+    //             attributes: ['nickname']
+    //         }
+    //     ],
+    //     raw: true,
+    //     attributes: {
+    //         exclude: [
+    //             'skeleton'
+    //         ],
+    //         include: [
+    //             [
+    //                 sequelize.literal(`(
+    //                     SELECT COUNT(*) FROM user_exercise_likes AS ul
+    //                     WHERE exercises.exercise_id = ul.exercise_id
+    //                     AND user_id = '${user_id}'
+    //                 )
+    //                 `),
+    //                 'isLike'
+    //             ]
+    //         ]
+    //     },
+    //     where: {
+    //         status: 'ACTIVE'
+    //     }
+    // })
+
+    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, u.nickname, t.tag_name,
+                (
+                    SELECT COUNT(*) FROM user_exercise_likes AS ul
+                    WHERE e.exercise_id = ul.exercise_id
+                    AND ul.user_id = '${user_id}'
+                ) AS isLike
+                FROM users AS u JOIN exercises AS e ON u.user_id=e.user_id JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id
+                JOIN tags AS t ON et.tag_id = t.tag_id
+                WHERE e.status='ACTIVE';`
+
+    let result = await db.sequelize.query(query);
+
     return result;
 }
 
