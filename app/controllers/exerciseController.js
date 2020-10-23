@@ -95,9 +95,8 @@ exports.exerciseOneInfo = async (req,res) => {
 
 exports.exercisePoseDataPost = async (req,res) => {
     const exercise_id = req.params.exercise_id
-    const pose_data = req.body.pose_data
     try{
-        let exerciseResult = await exerciseService.exercisePoseDataPostService(exercise_id, pose_data)
+        let exerciseResult = await exerciseService.exercisePoseDataPostService(exercise_id)
     
         res.send({
             message: "exercise pose data post 성공",

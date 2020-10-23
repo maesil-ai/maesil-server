@@ -138,11 +138,10 @@ exports.exerciseIsUserService = async(exercise_id, user_id) => {
     return result;
 }
 
-exports.exercisePoseDataPostService = async(exercise_id, pose_data) => {
+exports.exercisePoseDataPostService = async(exercise_id) => {
     await Exercise.update(
         {
-            status: 'ACTIVE',
-            pose_data: pose_data
+            status: 'ACTIVE'
         },
         {
             where: {
