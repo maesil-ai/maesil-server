@@ -1,5 +1,6 @@
 const db = require("../models");
 const { sequelize } = require("../models");
+const Exercise = db.exercises;
 const Op = db.Sequelize.Op;
 
 exports.exerciseAllInfoNoUserService = async() => {
@@ -36,7 +37,7 @@ exports.exerciseAllInfoNoUserService = async() => {
         
     let result = await db.sequelize.query(query);
 
-    return result;
+    return result[0];
 }
 
 exports.exerciseAllInfoService = async (user_id) =>{
@@ -90,7 +91,7 @@ exports.exerciseAllInfoService = async (user_id) =>{
 
     let result = await db.sequelize.query(query);
 
-    return result;
+    return result[0];
 }
 
 exports.exerciseOneInfoService = async (user_id, exercise_id) => {
