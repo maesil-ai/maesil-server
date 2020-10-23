@@ -22,10 +22,17 @@ exports.exerciseAllInfoNoUserService = async() => {
     //    },
     // })
 
-    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, u.nickname, t.tag_name
-                FROM users AS u JOIN exercises AS e ON u.user_id=e.user_id JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id
-                JOIN tags AS t ON et.tag_id = t.tag_id
-                WHERE e.status='ACTIVE';`
+    let query = `SELECT 
+                e.exercise_id, e.title, e.thumb_url, 
+                e.thumb_gif_url, u.nickname, GROUP_CONCAT(t.tag_name) AS tag_list
+            FROM users u
+                LEFT JOIN exercises e ON u.user_id = e.user_id
+                LEFT JOIN exercise_tags et ON e.exercise_id = et.exercise_id
+                LEFT JOIN tags t ON et.tag_id = t.tag_id
+            WHERE e.status = 'ACTIVE'
+            GROUP BY e.exercise_id;`
+
+
         
     let result = await db.sequelize.query(query);
 
@@ -65,15 +72,21 @@ exports.exerciseAllInfoService = async (user_id) =>{
     //     }
     // })
 
-    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, u.nickname, t.tag_name,
+
+    let query = `SELECT 
+                e.exercise_id, e.title, e.thumb_url, 
+                e.thumb_gif_url, u.nickname, GROUP_CONCAT(t.tag_name) AS tag_list,
                 (
                     SELECT COUNT(*) FROM user_exercise_likes AS ul
                     WHERE e.exercise_id = ul.exercise_id
                     AND ul.user_id = '${user_id}'
                 ) AS isLike
-                FROM users AS u JOIN exercises AS e ON u.user_id=e.user_id JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id
-                JOIN tags AS t ON et.tag_id = t.tag_id
-                WHERE e.status='ACTIVE';`
+            FROM users u
+                LEFT JOIN exercises e ON u.user_id = e.user_id
+                LEFT JOIN exercise_tags et ON e.exercise_id = et.exercise_id
+                LEFT JOIN tags t ON et.tag_id = t.tag_id
+            WHERE e.status = 'ACTIVE'
+            GROUP BY e.exercise_id;`
 
     let result = await db.sequelize.query(query);
 
