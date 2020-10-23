@@ -84,6 +84,7 @@ require('./app/routes/exerciseLikesRoute')(app);
 require('./app/routes/channelRoute')(app);
 require('./app/routes/courseRoute')(app);
 require('./app/routes/testRoute')(app);
+require('./app/routes/searchRoute')(app);
     
 
 // set port, listen for requests
