@@ -1,34 +1,35 @@
 const db = require("../models");
-const userRoute = require("../routes/userRoute");
 const { sequelize } = require("../models");
-const Exercise = db.exercises;
-const ExerciseTag = db.exercise_tags;
-const Exercise_Likes = db.user_exercise_likes;
-const User = db.users;
 const Op = db.Sequelize.Op;
 
 exports.exerciseAllInfoNoUserService = async() => {
-       let result = await Exercise.findAll({
-       attributes:{
-        exclude: [
-            'skeleton'
-        ]
-       },
-       include: [
-           {
-               model: User,
-               required: true,
-               attributes: ['nickname'],
-           },
-       ],
-       raw: true,
-       where: {
-        status: 'ACTIVE'
-       },
-    })
-    
+    //    let result = await Exercise.findAll({
+    //    attributes:{
+    //     exclude: [
+    //         'skeleton'
+    //     ]
+    //    },
+    //    include: [
+    //        {
+    //            model: User,
+    //            required: true,
+    //            attributes: ['nickname'],
+    //        },
+    //    ],
+    //    raw: true,
+    //    where: {
+    //     status: 'ACTIVE'
+    //    },
+    // })
+
+    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, u.nickname, t.tag_name
+                FROM users AS u JOIN exercises AS e ON u.user_id=e.user_id JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id
+                JOIN tags AS t ON et.tag_id = t.tag_id
+                WHERE e.status='ACTIVE';`
+        
+    let result = await db.sequelize.query(query);
+
     return result;
-    
 }
 
 exports.exerciseAllInfoService = async (user_id) =>{
