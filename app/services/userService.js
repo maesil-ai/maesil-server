@@ -14,11 +14,11 @@ exports.isUser = async (user_email)=> {
     return result;
 }
 
-exports.signUp = async (user_email, accessToken, profile_image_url)=>{
+exports.signUp = async (user_email, accessToken, profile_image)=>{
     await User.create({
         email: user_email,
         password: accessToken,
-        profile_image_url: profile_image_url,
+        profile_image: profile_image,
         stats: ''
     })
     return;

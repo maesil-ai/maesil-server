@@ -1,6 +1,7 @@
 module.exports = app => {
     const users = require("../controllers/userController.js");
-    const jwtMiddleware = require("../config/jwtMiddleware")
+    const jwtMiddleware = require("../config/jwtMiddleware");
+    const s3Api = require('../config/s3Api');
   
     var router = require("express").Router();
  

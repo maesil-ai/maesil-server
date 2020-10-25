@@ -26,9 +26,10 @@ exports.userInfo = async (req,res) => {
 } 
 
 exports.userSignUp = async (req,res) => {
+    // console.log("profile_image", req.file.location)
     const user_info = {
         id: req.body.id,
-        profile_image_url: req.body.profile_image_url,
+        profile_image: req.body.profile_image,
         access_token: req.body.access_token
     }
 
@@ -55,7 +56,7 @@ exports.userSignUp = async (req,res) => {
             jwt: token
         })
       } else{
-          let result =  await UserService.signUp(user_info.id, user_info.access_token, user_info.profile_image_url)
+          let result =  await UserService.signUp(user_info.id, user_info.access_token, user_info.profile_image)
           let result_isUser = await UserService.isUser(user_info.id);
           
             console.log(result)
