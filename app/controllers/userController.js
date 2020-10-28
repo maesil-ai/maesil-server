@@ -119,6 +119,19 @@ exports.userSubscribeInfo = async(req,res) => {
     })
 }
 
+exports.userTodayTotal = async(req,res) => {
+    const token = req.verifiedToken
+    let result = await await UserService.userTodayTotalService(token.user_id)
+
+    res.send({
+        message: "일별 통계 조회 성공",
+        code: 200,
+        result: result
+    })
+}
+
+
+
 exports.userNameToId = async(req,res)=>{
     const nickname = req.query.nickname
     let result = await UserService.userNameToIdService(nickname);

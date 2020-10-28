@@ -15,8 +15,9 @@ const documentDatabase = require('./app/config/documentDatabase')
 //     origin: "http://localhost:8081"
 // }
 
-
 app.use(cors())
+
+
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -85,7 +86,7 @@ require('./app/routes/channelRoute')(app);
 require('./app/routes/courseRoute')(app);
 require('./app/routes/testRoute')(app);
 require('./app/routes/searchRoute')(app);
-    
+require('./app/routes/uploadRoute')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

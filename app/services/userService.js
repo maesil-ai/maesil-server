@@ -63,6 +63,16 @@ exports.userSubscribeService = async(user_id) => {
    return result;
 }
 
+exports.userTodayTotalService = async(user_id) => {
+    console.log(user_id)
+    let query = `SELECT DATE(started_at) AS today_date, SEC_TO_TIME(SUM(play_time)) AS total_time, SUM(kcal) AS total_kcal, SUM(similarity_value) AS similarity_value FROM user_exercise_history WHERE user_id=:user_id GROUP BY today_date;`
+   let value = {
+       user_id: user_id
+   }
+   let datas = await db.sequelize.query(query, {replacements: value})
+   return datas[0];
+}
+
 exports.userNameToIdService = async(nickname) => {
     let result = await User.findOne({
         attributes: [
