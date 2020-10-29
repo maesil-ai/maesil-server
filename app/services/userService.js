@@ -14,6 +14,16 @@ exports.isUser = async (user_email)=> {
     return result;
 }
 
+exports.modifyProfileImage = async(user_email, profile_image) => {
+   let query = 'UPDATE users SET profile_image = :profile_image WHERE email = :user_email;'
+   let value = {
+       profile_image: profile_image,
+       user_email: user_email
+   }
+
+   await db.sequelize.query(query, {replacements: value})
+}
+
 exports.signUp = async (user_email, accessToken, profile_image)=>{
     await User.create({
         email: user_email,
