@@ -27,15 +27,17 @@ exports.userInfo = async (req,res) => {
 
 exports.userSignUp = async (req,res) => {
     // console.log("profile_image", req.file.location)
+    
     const user_info = {
-        id: req.body.id,
-        profile_image: req.body.profile_image,
+        id: req.body.id.toString(),
+        profile_image: req.body.profile_image_url,
         access_token: req.body.access_token
     }
 
     console.log(user_info);
     try{
       let isSignInUser = await UserService.isUser(user_info.id)
+      await UserService.modifyProfileImage(user_info.id, user_info.profile_image)
       if(isSignInUser.length >= 1){
 
         console.log(isSignInUser, "isSignInUser")
