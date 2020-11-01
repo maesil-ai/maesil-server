@@ -71,7 +71,9 @@ exports.userExerciseLikeInfoService = async (user_id) => {
     //     raw: true
     // })
 
-    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, e.video_url, u.nickname
+    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, e.video_url,
+                e.view_counts, e.like_counts,
+                (SELECT usr.nickname FROM users usr WHERE e.user_id=usr.user_id) nickname
                 FROM exercises AS e JOIN user_exercise_likes AS uel
                 ON uel.exercise_id = e.exercise_id
                 JOIN users AS u
