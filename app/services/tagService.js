@@ -13,7 +13,10 @@ exports.tagAllInfoService = async () =>{
 
 exports.tagSearchInfoService = async(tag_name)=>{
     console.log("tag test",tag_name)
-    let query = `SELECT e.exercise_id, e.title, e.description, e.thumb_url, e.thumb_gif_url, t.tag_name, t.tag_english_name
+    let query = `SELECT e.exercise_id, e.title, e.description, e.thumb_url, e.thumb_gif_url, t.tag_name, t.tag_english_name,
+    (
+        SELECT u.nickname FROM users u WHERE u.user_id = e.user_id
+    ) AS nickname
     FROM exercises AS e JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id JOIN tags AS t
     ON t.tag_id = et.tag_id WHERE t.tag_name LIKE'%${tag_name}%' OR t.tag_english_name LIKE '%${tag_name}%';`
 
@@ -23,7 +26,10 @@ exports.tagSearchInfoService = async(tag_name)=>{
 
 exports.tagCourseSearchInfoService = async(tag_name) => {
     console.log("tag Course Search test",tag_name)
-    let query = `SELECT c.course_id, c.course_name, c.description, c.thumb_url, c.thumb_gif_url, t.tag_name, t.tag_english_name
+    let query = `SELECT c.course_id, c.course_name, c.description, c.thumb_url, c.thumb_gif_url, t.tag_name, t.tag_english_name,
+    (
+        SELECT u.nickname FROM users u WHERE u.user_id = c.user_id
+    ) AS nickname
     FROM courses AS c JOIN course_tags AS ct ON c.course_id = ct.course_id JOIN tags AS t
     ON t.tag_id = ct.tag_id WHERE t.tag_name LIKE'%${tag_name}%' OR t.tag_english_name LIKE '%${tag_name}%';`
 
