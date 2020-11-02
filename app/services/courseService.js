@@ -28,7 +28,7 @@ exports.courseAllInfoNoUserService = async()=>{
 
     let query = `SELECT 
             c.course_id, c.exercise_list, c.course_name, c.like_counts, c.view_counts,
-            c.thumb_gif_url, u.nickname, u.profile_image,GROUP_CONCAT(t.tag_name) AS tag_list
+            c.thumb_url, c.thumb_gif_url, u.nickname, u.profile_image,GROUP_CONCAT(t.tag_name) AS tag_list
         FROM users u
             LEFT JOIN courses c ON u.user_id = c.user_id
             LEFT JOIN course_tags ct ON c.course_id = ct.course_id
