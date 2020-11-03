@@ -14,11 +14,13 @@ exports.tagAllInfoService = async () =>{
 exports.tagSearchInfoService = async(tag_name)=>{
     console.log("tag test",tag_name)
     let query = `SELECT u.user_id, u.nickname, u.profile_image, e.exercise_id, e.title, e.description, e.thumb_url, e.thumb_gif_url,
-                e.like_counts, e.view_counts, t.tag_name, t.tag_english_name
-    FROM users AS u
-    JOIN exercises AS e ON u.user_id = e.user_id
-    JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id JOIN tags AS t
-    ON t.tag_id = et.tag_id WHERE t.tag_name LIKE'%${tag_name}%' OR t.tag_english_name LIKE '%${tag_name}%';`
+                e.like_counts, e.view_counts, GROUP_CONCAT(t.tag_name) AS tag_list
+                FROM users AS u
+    LEFT JOIN exercises AS e ON u.user_id = e.user_id
+    LEFT JOIN exercise_tags AS et ON e.exercise_id = et.exercise_id 
+    LEFT JOIN tags AS t
+    ON t.tag_id = et.tag_id WHERE t.tag_name LIKE'%${tag_name}%'
+    GROUP BY e.exercise_id;`
 
     let result = await db.sequelize.query(query);
     return result[0];
@@ -27,11 +29,13 @@ exports.tagSearchInfoService = async(tag_name)=>{
 exports.tagCourseSearchInfoService = async(tag_name) => {
     console.log("tag Course Search test",tag_name)
     let query = `SELECT u.user_id, u.nickname, u.profile_image, c.course_id, c.course_name, c.description, c.thumb_url, c.thumb_gif_url, 
-                c.like_counts, c.view_counts, t.tag_name, t.tag_english_name
+                c.like_counts, c.view_counts, GROUP_CONCAT(t.tag_name) AS tag_list
     FROM users AS u
-    JOIN courses AS c ON u.user_id = c.user_id
-    JOIN course_tags AS ct ON c.course_id = ct.course_id JOIN tags AS t
-    ON t.tag_id = ct.tag_id WHERE t.tag_name LIKE'%${tag_name}%' OR t.tag_english_name LIKE '%${tag_name}%';`
+    LEFT JOIN courses AS c ON u.user_id = c.user_id
+    LEFT JOIN course_tags AS ct ON c.course_id = ct.course_id 
+    LEFT JOIN tags AS t
+    ON t.tag_id = ct.tag_id WHERE t.tag_name LIKE'%${tag_name}%'
+    GROUP BY c.course_id;`
 
     let result = await db.sequelize.query(query);
     return result[0];
