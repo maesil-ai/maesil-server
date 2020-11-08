@@ -165,6 +165,19 @@ exports.exercisePoseDataPostService = async(exercise_id) => {
     )
 }
 
+exports.exercisePoseDataFailService = async(exercise_id) => {
+    await Exercise.update(
+        {
+            status: 'FAILED'
+        },
+        {
+            where: {
+                exercise_id: exercise_id
+            }
+        }
+    )
+}
+
 
 exports.exerciseDeleteService = async(exercise_id) => {
     await Exercise.update({

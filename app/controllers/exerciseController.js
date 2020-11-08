@@ -95,8 +95,18 @@ exports.exerciseOneInfo = async (req,res) => {
 
 exports.exercisePoseDataPost = async (req,res) => {
     const exercise_id = req.params.exercise_id
+
+    const result = req.body.success
+    console.log(result, "ml server result")
+
+
     try{
-        let exerciseResult = await exerciseService.exercisePoseDataPostService(exercise_id)
+        
+        if(result){
+            let exerciseResult = await exerciseService.exercisePoseDataPostService(exercise_id)
+        } else {
+            await exerciseService.exercisePoseDataFailService(exercise_id)
+        }
     
         res.send({
             message: "exercise pose data post 성공",
