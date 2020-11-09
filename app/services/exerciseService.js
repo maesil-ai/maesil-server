@@ -24,7 +24,7 @@ exports.exerciseAllInfoNoUserService = async() => {
     // })
 
     let query = `SELECT 
-                e.exercise_id, e.title, e.thumb_url, e.like_counts, e.view_counts,
+                e.exercise_id, e.title, e.thumb_url, e.play_time, e.like_counts, e.view_counts,
                 e.thumb_gif_url, u.nickname, u.profile_image,GROUP_CONCAT(t.tag_name) AS tag_list
             FROM users u
                 LEFT JOIN exercises e ON u.user_id = e.user_id
@@ -75,7 +75,7 @@ exports.exerciseAllInfoService = async (user_id) =>{
 
 
     let query = `SELECT 
-                e.exercise_id, e.title, e.thumb_url,  e.like_counts, e.view_counts,
+                e.exercise_id, e.title, e.thumb_url, e.play_time, e.like_counts, e.view_counts,
                 e.thumb_gif_url, u.nickname, u.profile_image, GROUP_CONCAT(t.tag_name) AS tag_list,
                 (
                     SELECT COUNT(*) FROM user_exercise_likes AS ul
