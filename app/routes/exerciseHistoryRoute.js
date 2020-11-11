@@ -4,8 +4,6 @@ module.exports = app => {
     var router = require("express").Router();
   
    router.get("/", jwtMiddleware, exercisesHistory.exerciseHistoryInfo); // 운동기록 보기
-
-  
-    app.use('/exercises_history', router);
+   app.use('/exercises_history', router);
   };
   

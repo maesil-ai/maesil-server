@@ -3,7 +3,7 @@ module.exports = app => {
     const jwtMiddleware = require("../config/jwtMiddleware");
     const s3Api = require('../config/s3Api');
   
-    var router = require("express").Router();
+    let router = require("express").Router();
  
 
     router.post("/",users.userSignUp); // 회원가입 & 로그인

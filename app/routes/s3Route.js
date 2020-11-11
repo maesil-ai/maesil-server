@@ -12,7 +12,7 @@ aws.config.update(env.aws);
 
 module.exports = app => {
    router.post('/', jwtMiddleware,s3Api.fields([{ name: 'exercise' }, { name: 'thumbnail' }, {name: 'gif_thumbnail'}]), async function(req,res){
-       console.log(req.body, "s3Api req log")
+
        const exerciseInfo = {
         user_id : req.verifiedToken.user_id,
         title: req.body.title,
@@ -43,10 +43,6 @@ module.exports = app => {
 
         // sqs 객체 생성
         const sqs = new aws.SQS(env.sqs.apiVersion);
-
-        console.log(uploadResult, "uploadResult")
-        console.log(exerciseInfo.video_url, "videourl")
-
         const message = {
             "exercise_id":  uploadResult.exercise_id,
             "video_url": exerciseInfo.video_url
@@ -69,7 +65,6 @@ module.exports = app => {
             "message": "exercise 업로드 성공"
         })
    })
-
-  
+   
     app.use('/upload', router);
   };

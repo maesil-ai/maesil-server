@@ -7,7 +7,7 @@ const courseController = require('../controllers/courseController')
 const tagService = require('../services/tagService')
 module.exports = app => {
    router.post('/', jwtMiddleware,courseApi.fields([{ name: 'thumbnail' }, {name: 'gif_thumbnail'}]), async function(req,res){
-       console.log(req.files, "course req log")
+    
        const courseInfo = {
         user_id : req.verifiedToken.user_id,
         course_name: req.body.course_name,
