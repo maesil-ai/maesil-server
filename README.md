@@ -42,7 +42,7 @@
 
 ### Upload
 
-![upload](https://i.imgur.com/g0EpWXg.gif)
+![upload](https://i.imgur.com/Y5VS2fI.gif)
 
 자신만의 운동을 업로드 할 수 있다.
 
