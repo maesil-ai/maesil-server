@@ -62,7 +62,7 @@
 
 
 ## 🐾 튜토리얼
-![maesil](https://i.imgur.com/SgHl9Ur.jpg)
+<img src="https://i.imgur.com/SgHl9Ur.jpg" height="300px" width="300px"/>
 
 ![tutorial](https://i.imgur.com/7zUuP0G.gif)
 
