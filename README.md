@@ -62,7 +62,6 @@
 
 
 ## 🐾 튜토리얼
-<img src="https://i.imgur.com/SgHl9Ur.jpg" height="300px" width="300px"/>
 
 ![tutorial](https://i.imgur.com/7zUuP0G.gif)
 
@@ -167,3 +166,4 @@ PR을 하기 전에는 에러가 없는지 체크를 해야합니다. 그리고 
 [MIT License](https://github.com/maesil-ai/maesil-client/LICENSE) © [매실 - Maesil](https://github.com/maesil-ai).
 
 ![codeblue](https://i.imgur.com/QtKhI7x.jpg)
+![Maesil](https://i.imgur.com/SgHl9Ur.jpg)
