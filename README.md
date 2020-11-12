@@ -62,6 +62,7 @@
 
 
 ## 🐾 튜토리얼
+![maesil](https://i.imgur.com/SgHl9Ur.jpg)
 
 ![tutorial](https://i.imgur.com/7zUuP0G.gif)
 
