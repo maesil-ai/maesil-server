@@ -70,6 +70,10 @@
 
 ![architecture](https://i.imgur.com/2O3UcMM.png)
 
+- ML Server와 통신을 위해 sqs를 이용
+- 긴 영상 업로드를 원활하게 하기 위해 5MB씩 나눠서 분할 업로드
+
+
 ### DB 설계
 
 ![database](https://i.imgur.com/GirWqq0.png)
