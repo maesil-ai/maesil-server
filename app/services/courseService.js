@@ -20,13 +20,25 @@ exports.courseUploadService = async(course_info) => {
 }
 
 exports.courseAllInfoNoUserService = async()=>{
-    let result = await Course.findAll({
-        where: {
-            status: 'ACTIVE'
-        }
-    })
+    // let result = await Course.findAll({
+    //     where: {
+    //         status: 'ACTIVE'
+    //     }
+    // })
 
-    return result;
+    let query = `SELECT 
+            c.course_id, c.exercise_list, c.course_name, c.like_counts, c.view_counts,
+            c.thumb_url, c.thumb_gif_url, u.nickname, u.profile_image,GROUP_CONCAT(t.tag_name) AS tag_list
+        FROM users u
+            LEFT JOIN courses c ON u.user_id = c.user_id
+            LEFT JOIN course_tags ct ON c.course_id = ct.course_id
+            LEFT JOIN tags t ON ct.tag_id = t.tag_id 
+        WHERE c.status = 'ACTIVE'
+        GROUP BY c.course_id;`
+
+    let result = await db.sequelize.query(query);
+
+    return result[0];
 }
 
 exports.courseOneInfoNoUserService = async(course_id) => {

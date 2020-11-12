@@ -1,3 +1,5 @@
+const maesil_image = require('../config/imageUrl.json').maesil_default_image
+
 module.exports = (sequelize, DataTypes) => { 
     return sequelize.define('users', {
          user_id: 
@@ -21,6 +23,12 @@ module.exports = (sequelize, DataTypes) => {
         nickname:
         { 
             type: DataTypes.STRING(10)
+        },
+        profile_image:
+        {
+            type: DataTypes.STRING(100),
+            allowNull: false,
+            defaultValue: maesil_image
         },
         gender:
         {

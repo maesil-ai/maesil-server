@@ -2,7 +2,7 @@ module.exports = app => {
     const channel = require("../controllers/channelController.js");
     const jwtMiddleware = require("../config/jwtMiddleware")
   
-    var router = require("express").Router();
+    let router = require("express").Router();
 
     router.get('/:channel_id', channel.userChannelInfo) // 채널 정보
     router.post('/:channel_id', jwtMiddleware, channel.channelLikesClick) // 채널 구독?좋아요?

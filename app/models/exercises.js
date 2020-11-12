@@ -31,6 +31,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT('long'),
             allowNull: false
         },
+        pose_data:
+        {
+            type: DataTypes.TEXT('long')
+        },
         thumb_url:
         {
             type: DataTypes.STRING
@@ -55,10 +59,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             defaultValue: 0
         },
-        tag_id:
-        {
-            type: DataTypes.INTEGER,
-        },
         like_counts:
         {
             type: DataTypes.INTEGER,
@@ -73,7 +73,7 @@ module.exports = (sequelize, DataTypes) => {
         {
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: "ACTIVE"
+            defaultValue: "PENDING"
         },
         created_at: 
         {

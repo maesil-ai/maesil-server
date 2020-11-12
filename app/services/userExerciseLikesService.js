@@ -51,31 +51,39 @@ exports.exerciseDislikesService = async(user_id, exercise_id)=>{
 
 // 좋아요 한 영상 보기
 exports.userExerciseLikeInfoService = async (user_id) => {
+ 
     // let result = await Exercise_Likes.findAll({
     //     where: {
     //         user_id: user_id
-    //     }
+    //     },
+    //     include: [
+    //         {
+    //             model: Exercise,
+    //             required: false,
+    //             attributes: ['exercise_id','title', 'thumb_url', 'video_url', 'play_time', 'like_counts','view_counts'],
+    //         },
+    //         // {
+    //         //     model: User,
+    //         //     required: false,
+    //         //     attributes: ['nickname']
+    //         // }
+    //     ],
+    //     raw: true
     // })
 
-    let result = await Exercise_Likes.findAll({
-        where: {
-            user_id: user_id
-        },
-        include: [
-            {
-                model: Exercise,
-                required: false,
-                attributes: ['exercise_id','title', 'thumb_url', 'video_url', 'play_time', 'like_counts','view_counts'],
-            },
-            // {
-            //     model: User,
-            //     required: false,
-            //     attributes: ['nickname']
-            // }
-        ],
-        raw: true
-    })
-
+    let query = `SELECT e.exercise_id, e.title, e.thumb_url, e.thumb_gif_url, e.video_url,
+                e.view_counts, e.like_counts,
+                (SELECT usr.nickname FROM users usr WHERE e.user_id=usr.user_id) nickname
+                FROM exercises AS e JOIN user_exercise_likes AS uel
+                ON uel.exercise_id = e.exercise_id
+                JOIN users AS u
+                ON u.user_id = uel.user_id WHERE uel.user_id = :user_id;`
+    let value = {
+        user_id: user_id
+    }
+    let datas = await db.sequelize.query(query, {replacements: value})
+ 
+    console.log(datas[0]);
     
-    return result;
+   return datas[0];
 }

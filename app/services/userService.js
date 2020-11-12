@@ -14,11 +14,21 @@ exports.isUser = async (user_email)=> {
     return result;
 }
 
-exports.signUp = async (user_email, accessToken, profile_image_url)=>{
+exports.modifyProfileImage = async(user_email, profile_image) => {
+   let query = 'UPDATE users SET profile_image = :profile_image WHERE email = :user_email;'
+   let value = {
+       profile_image: profile_image,
+       user_email: user_email
+   }
+
+   await db.sequelize.query(query, {replacements: value})
+}
+
+exports.signUp = async (user_email, accessToken, profile_image)=>{
     await User.create({
         email: user_email,
         password: accessToken,
-        profile_image_url: profile_image_url,
+        profile_image: profile_image,
         stats: ''
     })
     return;
@@ -61,6 +71,16 @@ exports.userSubscribeService = async(user_id) => {
    let result = datas[0]
 
    return result;
+}
+
+exports.userTodayTotalService = async(user_id) => {
+    console.log(user_id)
+    let query = `SELECT DATE(started_at) AS today_date, SEC_TO_TIME(SUM(play_time)) AS total_time, SUM(kcal) AS total_kcal, SUM(similarity_value) AS similarity_value FROM user_exercise_history WHERE user_id=:user_id GROUP BY today_date;`
+   let value = {
+       user_id: user_id
+   }
+   let datas = await db.sequelize.query(query, {replacements: value})
+   return datas[0];
 }
 
 exports.userNameToIdService = async(nickname) => {

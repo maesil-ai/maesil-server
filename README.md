@@ -4,6 +4,12 @@
 
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/maesil-ai/maesil-client/pulls)
 
+<p align=center style="line-height: 2;">
+  <a href="https://www.npmjs.com/package/@egjs/flicking" target="_blank"><img src="https://img.shields.io/npm/v/@egjs/flicking.svg?style=flat-square&color=007acc&label=version&logo=NPM" alt="version" /></a>
+
+
+</p>
+
 [![매실](https://i.imgur.com/b0YBYnC.png)](https://maesil.ai)
 
 ## 🚩 목차
@@ -24,42 +30,38 @@
 
 ### Play
 
-![main](https://i.imgur.com/3Q85jq7.png)
+![main](https://i.imgur.com/LqqYDEb.png)
 
 사용자는 메인화면에서 자신이 원하는 운동 동작을 고를 수 있다.
 
-![play](https://i.imgur.com/dhA0m9Q.gif)
+![practice](https://i.imgur.com/NZMPrwV.png)
+
+![play](https://i.imgur.com/cYCgofQ.png)
 
 자신이 가이드의 자세를 잘 따라하고 있는지 AI 기반으로 실시간으로 점수를 피드백 받을 수 있다.
 
 ### Upload
 
-![upload](https://i.imgur.com/g0EpWXg.gif)
+![upload](https://i.imgur.com/Y5VS2fI.gif)
 
-자신만의 운동을 업로드 할 수 있다
+자신만의 운동을 업로드 할 수 있다.
 
-### Course
-
-![코스](https://i.imgur.com/qmfm1gE.png)
-
-여러 운동들을 모아서 자신만의 운동 코스를 제작할 수 있다.
 
 ### Feedback
+![feedback](https://i.imgur.com/ExkNyMd.png)
 
-미구현: 사용자가 운동을 계속하도록 자극하는 장치
-업적, 레벨, 통계 시스템 등
-
-### Community
-
-미구현:컨텐츠 제작자와 상호작용하며 혼자 하는 운동이 아닌 다같이 하는 운동이라는 재미를 주는 기능피드, 게시글 기능
+운동 최종결과를 정량화된 숫자로 볼 수 있다.
 
 ### Coach
+![coach](https://i.imgur.com/l32RbLR.png)
 
-미구현: 자신의 체형과 운동 기록에 맞게 필요한 운동을 추천해주는 기술기존 유저들의 플레이를 분석하여 데이터에서 의미를 찾아내는 과정
+통계 시스템, 내가 운동한 기록을 볼 수 있다.
+
+
 
 ## 🐾 튜토리얼
 
-TO-DO
+![tutorial](https://i.imgur.com/7zUuP0G.gif)
 
 
 ## ⚙️ 시스템 구성도
@@ -70,7 +72,7 @@ TO-DO
 
 ### DB 설계
 
-![database](https://i.imgur.com/hTrCjef.png)
+![database](https://i.imgur.com/GirWqq0.png)
 
 ### CI/CD
 
@@ -96,8 +98,8 @@ TO-DO
 ##### 프로젝트 클론
 
 ```sh
-git clone https://github.com/maesil-ai/maesil-client.git
-cd maesil-client
+git clone https://github.com/maesil-ai/maesil-server.git
+cd maesil-server
 yarn
 ```
 
