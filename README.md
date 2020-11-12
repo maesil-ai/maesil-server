@@ -4,12 +4,6 @@
 
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg)](https://github.com/maesil-ai/maesil-client/pulls)
 
-<p align=center style="line-height: 2;">
-  <a href="https://www.npmjs.com/package/@egjs/flicking" target="_blank"><img src="https://img.shields.io/npm/v/@egjs/flicking.svg?style=flat-square&color=007acc&label=version&logo=NPM" alt="version" /></a>
-
-
-</p>
-
 [![매실](https://i.imgur.com/b0YBYnC.png)](https://maesil.ai)
 
 ## 🚩 목차
@@ -101,6 +95,10 @@ width="400px" height="700px"/>
 ### CI/CD
 
 ![CI/CD](https://i.imgur.com/EfdPlQw.png)
+
+### ML Architecture
+
+![](https://i.imgur.com/Cift9oW.png)
 
 ## 🌏 브라우저 지원
 
