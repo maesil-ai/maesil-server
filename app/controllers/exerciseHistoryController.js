@@ -2,11 +2,12 @@ const exerciseHistoryService = require('../services/userExerciseHistoryService')
 
 exports.exerciseHistoryPost = async (req,res)=>{
     let exercise_id = req.params.exercise_id
-    let user_id = 1; // 임시 유저
+    const user_id = req.verifiedToken.user_id
 
     const historyInfo = {
         user_id : user_id,
         exercise_id : exercise_id,
+        similarity_value: req.body.similarity_value, 
         score: req.body.score,
         play_time: req.body.play_time,
         cal: req.body.cal
@@ -31,7 +32,8 @@ exports.exerciseHistoryPost = async (req,res)=>{
 
 
 exports.exerciseHistoryInfo = async (req,res) =>{
-    let user_id = 1
+    const user_id = req.verifiedToken.user_id
+    console.log(req.verifiedToken)
     try{
         let result = await exerciseHistoryService.exerciseHistoryInfoService(user_id);
         res.send({

@@ -47,65 +47,78 @@ exports.exerciseAllInfo = async (req, res) => {
   }
 };
 
-exports.exerciseOneInfo = async (req, res) => {
-  let exercise_id = 1234567;
-  exercise_id = req.params.exercise_id;
-  const token = req.headers["x-access-token"] || req.query.token;
-
-  if (!token) {
-    try {
-      result = await exerciseService.exerciseOneInfoNoUserService(exercise_id);
-      res.send({
-        message: "특정 exercise 상세조회 성공",
-        code: 200,
-        result: result,
-      });
-    } catch (err) {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while Get the exerciseOneInfo.",
-      });
-    }
-  } else {
-    await jwt.verify(
-      token,
-      secret_config.jwtsecret,
-      async (err, verifiedToken) => {
-        if (err) throw err;
-        let user_id = verifiedToken.user_id;
-        try {
-          let result = await exerciseService.exerciseOneInfoService(
-            user_id,
-            exercise_id
-          );
-          if (result === null) {
-            return res.send({
-              message: "exercise 정보 없음",
-              code: 204,
-              result: result,
-            });
+    if(!token){
+        try{
+            result =  await exerciseService.exerciseOneInfoNoUserService(exercise_id)
+            res.send({
+                message: "특정 exercise 상세조회 성공",
+                code: 200,
+                result: result
+            })
+          }catch(err){
+            res.status(500).send({
+                message:
+                  err.message || "Some error occurred while Get the exerciseOneInfo."
+              });
           }
-          res.send({
-            message: "특정 exercise 상세조회 성공",
-            code: 200,
-            result: result,
-          });
-        } catch (err) {
-          res.status(500).send({
-            message:
-              err.message ||
-              "Some error occurred while Get the exerciseOneInfo.",
-          });
-        }
-      }
-    );
-  }
-};
 
-exports.exerciseDeleteOne = async (req, res) => {
-  const user_id = req.verifiedToken.user_id;
-  console.log(user_id);
-  const exercise_id = req.params.exercise_id;
+    } else {
+        await jwt.verify(token, secret_config.jwtsecret, async(err, verifiedToken) => {
+            if(err) throw err;
+            let user_id = verifiedToken.user_id
+            try{
+                let result = await exerciseService.exerciseOneInfoService(user_id, exercise_id)
+                if(result === null){
+                    return res.send({
+                        message: "exercise 정보 없음",
+                        code: 204,
+                        result: result
+                    })
+                }
+                res.send({
+                    message: "특정 exercise 상세조회 성공",
+                    code: 200,
+                    result: result
+                })
+            }catch(err){
+                res.status(500).send({
+                    message:
+                      err.message || "Some error occurred while Get the exerciseOneInfo."
+                  });
+            }  
+        })
+    }
+}
+
+exports.exercisePoseDataPost = async (req,res) => {
+    const exercise_id = req.params.exercise_id
+
+    const result = req.body.success
+    console.log(result, "ml server result")
+
+
+    try{
+        
+        if(result){
+            let exerciseResult = await exerciseService.exercisePoseDataPostService(exercise_id)
+        } else {
+            await exerciseService.exercisePoseDataFailService(exercise_id)
+        }
+    
+        res.send({
+            message: "exercise pose data post 성공",
+            code: 200
+        })
+
+    }catch(err){
+        res.status(500).send({
+            message:
+              err.message || "Some error occurred while Get the exercise pose data post."
+          });
+    } 
+}
+
+
 
   let exerciseIsUser = await exerciseService.exerciseIsUserService(
     exercise_id,

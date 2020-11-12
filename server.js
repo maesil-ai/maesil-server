@@ -5,20 +5,28 @@ const app = express();
 const passport = require('passport')
 const session = require('express-session')
 const kakaoKey = require('./app/config/kakaoKey.json')
+const mongoose = require('mongoose')
+const documentDatabase = require('./app/config/documentDatabase')
+
+// let fs = require('fs');
+// let ca = [fs.readFileSync('./rds-combined-ca-bundle.pem')]
 
 // var corsOptions = {
 //     origin: "http://localhost:8081"
 // }
 
-
 app.use(cors())
+
+
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
+// app.use(express.static(path.join(__dirname, '/app/public')));
 
+app.use(express.json({limit: '100mb'}));
 
-
+app.use(express.static('/client/build'));
 
 app.use(
     session({
@@ -34,6 +42,24 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
+const mongo_db = mongoose.connection;
+mongo_db.on('error', console.error);
+mongo_db.once('open', function(){
+    // CONNECTED TO MONGODB SERVER
+    console.log("Connected to mongodb server");
+});
+
+// mongoose.connect(documentDatabase.url, {
+//     useNewUrlParser: true,
+//     sslValidate: true,
+//     sslCA: fs.readFileSync('./rds-combined-ca-bundle.pem'),
+//     useUnifiedTopology: true
+// }, function(err, client){
+//     if(err) throw err;
+//     console.log("document db success")
+// })
+
+mongoose.connect('mongodb://172.17.0.1/maesil_log')
 
 
 const db = require("./app/models");
@@ -58,7 +84,9 @@ require('./app/routes/exerciseHistoryRoute')(app);
 require('./app/routes/exerciseLikesRoute')(app);
 require('./app/routes/channelRoute')(app);
 require('./app/routes/courseRoute')(app);
-    
+require('./app/routes/testRoute')(app);
+require('./app/routes/searchRoute')(app);
+require('./app/routes/uploadRoute')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

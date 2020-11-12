@@ -26,15 +26,18 @@ exports.userInfo = async (req,res) => {
 } 
 
 exports.userSignUp = async (req,res) => {
+    // console.log("profile_image", req.file.location)
+    
     const user_info = {
-        id: req.body.id,
-        profile_image_url: req.body.profile_image_url,
+        id: req.body.id.toString(),
+        profile_image: req.body.profile_image_url,
         access_token: req.body.access_token
     }
 
     console.log(user_info);
     try{
       let isSignInUser = await UserService.isUser(user_info.id)
+      await UserService.modifyProfileImage(user_info.id, user_info.profile_image)
       if(isSignInUser.length >= 1){
 
         console.log(isSignInUser, "isSignInUser")
@@ -55,7 +58,7 @@ exports.userSignUp = async (req,res) => {
             jwt: token
         })
       } else{
-          let result =  await UserService.signUp(user_info.id, user_info.access_token, user_info.profile_image_url)
+          let result =  await UserService.signUp(user_info.id, user_info.access_token, user_info.profile_image)
           let result_isUser = await UserService.isUser(user_info.id);
           
             console.log(result)
@@ -103,6 +106,11 @@ exports.userAddInfo = async (req,res) => {
     })
 } 
 
+exports.userLocalSignUp = async (req,res) => {
+    
+}
+
+
 exports.userSubscribeInfo = async(req,res) => {
     const token = req.verifiedToken
     let result = await UserService.userSubscribeService(token.user_id)
@@ -112,6 +120,19 @@ exports.userSubscribeInfo = async(req,res) => {
         result: result
     })
 }
+
+exports.userTodayTotal = async(req,res) => {
+    const token = req.verifiedToken
+    let result = await await UserService.userTodayTotalService(token.user_id)
+
+    res.send({
+        message: "일별 통계 조회 성공",
+        code: 200,
+        result: result
+    })
+}
+
+
 
 exports.userNameToId = async(req,res)=>{
     const nickname = req.query.nickname
