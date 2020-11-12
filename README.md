@@ -30,41 +30,53 @@
 개인 운동 기록을 원활히 할 수 있도록 돕는다.
 또한, Maesil School을 도입하여, 언택트 시대의 체육 수업 및 강의를 돕는 운동수업 플랫폼이다.
 
-### Play
+### 1. Play
 
 ![main](https://i.imgur.com/LqqYDEb.png)
 
-사용자는 메인화면에서 자신이 원하는 운동 동작을 고를 수 있다.
+<b>사용자는 메인화면에서 자신이 원하는 운동 동작을 고를 수 있다.</b>
+<br><br><br>
 
 ![practice](https://i.imgur.com/NZMPrwV.png)
 
 ![play](https://i.imgur.com/cYCgofQ.png)
 
-자신이 가이드의 자세를 잘 따라하고 있는지 AI 기반으로 실시간으로 점수를 피드백 받을 수 있다.
+<b>자신이 가이드의 자세를 잘 따라하고 있는지 AI 기반으로 실시간으로 점수를 피드백 받을 수 있다.</b>
+<br><br><br>
 
-### Upload
+### 2. Upload
 
 ![upload](https://i.imgur.com/Y5VS2fI.gif)
 
-자신만의 운동을 업로드 할 수 있다.
+<b>자신만의 운동을 업로드 할 수 있다.<br>
+<br><br><br>
 
 
-### Feedback
+### 3. Feedback
 ![feedback](https://i.imgur.com/ExkNyMd.png)
 
-운동 최종결과를 정량화된 숫자로 볼 수 있다.
 
-### Coach
+<b> 운동 최종결과를 정량화된 숫자로 볼 수 있다.</b>
+<br><br><br>
+
+### 4. Coach
 ![coach](https://i.imgur.com/l32RbLR.png)
 
-통계 시스템, 내가 운동한 기록을 볼 수 있다.
-
+<b>통계 시스템, 내가 운동한 기록을 볼 수 있다.</b>
+<br><br><br>
 
 
 ## 🐾 튜토리얼
 
 ![tutorial](https://i.imgur.com/7zUuP0G.gif)
 
+
+## 🐾 Mobile
+<img src="https://i.imgur.com/rbEMqPC.png" width="300px" height="450px"/>
+
+## 🐾 Tablet
+<img src="https://i.imgur.com/tNnYDke.png"
+width="400px" height="700px"/>
 
 ## ⚙️ 시스템 구성도
 
