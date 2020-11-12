@@ -1,54 +1,51 @@
-const exerciseService = require('../services/exerciseService')
-const exerciseLikes = require('../services/userExerciseLikesService')
-const jwt = require('jsonwebtoken')
-const secret_config = require("../config/secret")
+const exerciseService = require("../services/exerciseService");
+const exerciseLikes = require("../services/userExerciseLikesService");
+const jwt = require("jsonwebtoken");
+const secret_config = require("../config/secret");
 
-exports.exerciseAllInfo = async (req,res) => {
-
-    const token = req.headers['x-access-token'] || req.query.token
-    if(!token){
-        try{
-            result =  await exerciseService.exerciseAllInfoNoUserService()
-            res.send({
-                  message: "exercise 전체 조회 성공",
-                  code: 200,
-                  result: result
-              })
-          }catch(err){
-              res.status(500).send({
-                  message:
-                  err.message || "Some error occurred while Get the exerciseAllInfo."
-              });
-          }
-
-    } else {
-
-        await jwt.verify(token, secret_config.jwtsecret, async(err, verifiedToken) => {
-            if(err) throw err;
-            
-            let user_id = verifiedToken.user_id
-            console.log(user_id)
-            try{
-                result = await exerciseService.exerciseAllInfoService(user_id)
-                return res.send({
-                      message: "exercise 전체 조회 성공",
-                      code: 200,
-                      result: result
-                  })
-              }catch(err){
-                  return res.status(500).send({
-                      message:
-                      err.message || "Some error occurred while Get the exerciseAllInfo."
-                  });
-              }
-        })
+exports.exerciseAllInfo = async (req, res) => {
+  const token = req.headers["x-access-token"] || req.query.token;
+  if (!token) {
+    try {
+      result = await exerciseService.exerciseAllInfoNoUserService();
+      res.send({
+        message: "exercise 전체 조회 성공",
+        code: 200,
+        result: result,
+      });
+    } catch (err) {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while Get the exerciseAllInfo.",
+      });
     }
-}
+  } else {
+    await jwt.verify(
+      token,
+      secret_config.jwtsecret,
+      async (err, verifiedToken) => {
+        if (err) throw err;
 
-exports.exerciseOneInfo = async (req,res) => {
-    let exercise_id = 1234567;
-    exercise_id = req.params.exercise_id
-    const token = req.headers['x-access-token'] || req.query.token
+        let user_id = verifiedToken.user_id;
+        console.log(user_id);
+        try {
+          result = await exerciseService.exerciseAllInfoService(user_id);
+          return res.send({
+            message: "exercise 전체 조회 성공",
+            code: 200,
+            result: result,
+          });
+        } catch (err) {
+          return res.status(500).send({
+            message:
+              err.message ||
+              "Some error occurred while Get the exerciseAllInfo.",
+          });
+        }
+      }
+    );
+  }
+};
 
     if(!token){
         try{
@@ -122,26 +119,25 @@ exports.exercisePoseDataPost = async (req,res) => {
 }
 
 
-exports.exerciseDeleteOne = async (req,res) => {
-    const user_id = req.verifiedToken.user_id
-    console.log(user_id)
-    const exercise_id = req.params.exercise_id
 
-    let exerciseIsUser = await exerciseService.exerciseIsUserService(exercise_id, user_id)
-    
-    console.log(exerciseIsUser, " exerciseIsUser")
+  let exerciseIsUser = await exerciseService.exerciseIsUserService(
+    exercise_id,
+    user_id
+  );
 
-    if(exerciseIsUser.length < 1){
-        return res.send({
-            message: "삭제 권한이 없습니다",
-            code: 403
-        })
-    }
+  console.log(exerciseIsUser, " exerciseIsUser");
 
-    let result = await exerciseService.exerciseDeleteService(exercise_id)
+  if (exerciseIsUser.length < 1) {
+    return res.send({
+      message: "삭제 권한이 없습니다",
+      code: 403,
+    });
+  }
 
-    res.send({
-        message: "exercise 삭제 성공",
-        code: 200
-    })
-}
+  let result = await exerciseService.exerciseDeleteService(exercise_id);
+
+  res.send({
+    message: "exercise 삭제 성공",
+    code: 200,
+  });
+};

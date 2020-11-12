@@ -63,7 +63,7 @@ mongoose.connect('mongodb://172.17.0.1/maesil_log')
 
 
 const db = require("./app/models");
-db.sequelize.sync(); // sequelize 싱크하기
+db.sequelize.sync();
 // // drop the table if it already exists
 // db.sequelize.sync({ force: true }).then(() => {
 //   console.log("Drop and re-sync db.");
@@ -71,7 +71,7 @@ db.sequelize.sync(); // sequelize 싱크하기
 
 
 // simple route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     res.json({ message: "Welcome to bezkoder application." });
 });
 

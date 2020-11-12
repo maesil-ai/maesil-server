@@ -1,4 +1,4 @@
-const dbConfig = require("../config/database")
+const dbConfig = require("../config/database");
 
 var Sequelize = require("sequelize");
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
@@ -41,6 +41,4 @@ db.exercises.belongsTo(db.users, {foreignKey: 'user_id'});
 db.users.hasMany(db.exercises, {foreignKey: 'user_id'});
 
 
-
 module.exports = db;
-

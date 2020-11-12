@@ -10,7 +10,7 @@ exports.exerciseHistoryPost = async (req,res)=>{
         similarity_value: req.body.similarity_value, 
         score: req.body.score,
         play_time: req.body.play_time,
-        kcal: req.body.kcal
+        cal: req.body.cal
     }
 
     try{
@@ -25,7 +25,8 @@ exports.exerciseHistoryPost = async (req,res)=>{
             message:
               err.message || "Some error occurred while Get the exerciseHistoryPost."
           });
-    } 
+    }  
+
     
 }
 

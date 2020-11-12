@@ -1,6 +1,7 @@
 const db = require("../models");
 const { sequelize } = require("../models");
 const Exercise = db.exercises;
+
 const Op = db.Sequelize.Op;
 
 exports.exerciseAllInfoNoUserService = async() => {
@@ -95,34 +96,34 @@ exports.exerciseAllInfoService = async (user_id) =>{
 }
 
 exports.exerciseOneInfoService = async (user_id, exercise_id) => {
-    let result = await Exercise.findOne({
-        attributes: {
-            include: [
-                [
-                    sequelize.literal(`(
+  let result = await Exercise.findOne({
+    attributes: {
+      include: [
+        [
+          sequelize.literal(`(
                         SELECT COUNT(*) FROM user_exercise_likes AS ul
                         WHERE exercises.exercise_id = ul.exercise_id
                         AND user_id = '${user_id}'
                     )
                     `),
-                    'isLike'
-                ]
-            ]
-        },
-        where: {
-            exercise_id: exercise_id
-        }
-    })
+          "isLike",
+        ],
+      ],
+    },
+    where: {
+      exercise_id: exercise_id,
+    },
+  });
 
-    return result;
-}
+  return result;
+};
 
+exports.exerciseOneInfoNoUserService = async (exercise_id) => {
+  let result = await Exercise.findByPk(exercise_id);
+  await result.increment("view_counts", { by: 1 });
+  return result;
+};
 
-exports.exerciseOneInfoNoUserService = async(exercise_id)=>{
-    let result = await Exercise.findByPk(exercise_id);
-    await result.increment('view_counts', {by:1});
-    return result;
-}
 
 exports.exerciseUploadService = async(exercise_info) => {
     let result = await Exercise.create({
@@ -140,17 +141,20 @@ exports.exerciseUploadService = async(exercise_info) => {
     return result;
 }
 
-exports.exerciseIsUserService = async(exercise_id, user_id) => {
-    let result = await Exercise.findAll({
-        where:{
-            exercise_id: exercise_id,
-            user_id: user_id,
-            status: 'ACTIVE'   
-        }
-    })
 
-    return result;
-}
+exports.exerciseIsUserService = async (exercise_id, user_id) => {
+  let result = await Exercise.findAll({
+    where: {
+      exercise_id: exercise_id,
+      user_id: user_id,
+      status: "ACTIVE",
+    },
+  });
+
+  let result = await Exercise.findByPk(exercise_id);
+  return result;
+};
+
 
 exports.exercisePoseDataPostService = async(exercise_id) => {
     await Exercise.update(
@@ -184,9 +188,9 @@ exports.exerciseDeleteService = async(exercise_id) => {
         status: 'DELETED'
     },
     {
-        where: {
-            exercise_id : exercise_id
-        }
+      where: {
+        exercise_id: exercise_id,
+      },
     }
-    )
-}
+  );
+};
