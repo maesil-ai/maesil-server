@@ -81,7 +81,7 @@ width="400px" height="700px"/>
 ## ⚙️ 시스템 구성도
 
 ### User
-<img height="50px" width="50px" src="blob:https://imgur.com/7a01edb2-c488-47c3-9778-2a74a36d5d1e"/> Oauth2를 사용한 Social Login
+<img height="50px" width="50px" src="https://i.imgur.com/53PN7sU.png"/> Oauth2를 사용한 Social Login
 
 ### 시스템 아키텍처
 
